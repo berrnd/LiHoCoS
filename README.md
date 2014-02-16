@@ -16,6 +16,7 @@ LiHoCoS is here to keep this data in a single place and make it analyzable in co
 * Home
   * This is all about smart home
   * Control your devices, regardless from which manufacturer, LiHoCoS can control everything - thanks to its "Everyhting is done by a plugin"-system
+  * Another thing here is household management.
 
 ### Plugin based system
 LiHoCoS is only the "shell", it just manages the objects and evaluates the data.
@@ -24,11 +25,11 @@ So LiHoCoS is the universal application for everyhting. :D
 
 ### Default plugins
 LiHoCoS is currently shipped with the following plugins, which were mainly created because I use the appropriate  thing/system:
-* Home/Blinds: Rademacher HomePilot
-* Home/Doors: HomeMatic (BidCoS)
-* Home/Lights: TellStick
-* Home/Sensors: TellStick
-* Home/Windows: HomeMatic (BidCoS)
+* Home/Blinds: [Rademacher HomePilot](http://homepilot.rademacher.de/)
+* Home/Doors: [HomeMatic (BidCoS)](http://www.homematic.com/)
+* Home/Lights: [TellStick](http://www.telldus.se/products/tellstick)
+* Home/Sensors: [TellStick](http://www.telldus.se/products/tellstick)
+* Home/Windows: [HomeMatic (BidCoS)](http://www.homematic.com/)
 
 ### Project status
 LiHoCoS was just created, so there are not too many features so far.
