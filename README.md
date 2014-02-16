@@ -22,5 +22,18 @@ LiHoCoS is only the "shell", it just manages the objects and evaluates the data.
 When it comes to connecting to other system to retrieve data or controlling physical things (smart home), everything is done by a plugin.
 So LiHoCoS is the universal application for everyhting. :D
 
+### Default plugins
+LiHoCoS is currently shipped with the following plugins, which were mainly created because I use the appropriate  thing/system:
+* Home/Blinds: Rademacher HomePilot
+* Home/Doors: HomeMatic (BidCoS)
+* Home/Lights: TellStick
+* Home/Sensors: TellStick
+* Home/Windows: HomeMatic (BidCoS)
+
+### Project status
+LiHoCoS was just created, so there are not too many features so far.
+The first development step was focused on the (plugin) framework and smart home features.
+But now the features can and will come. :)
+
 ### License
 The MIT License (MIT)
