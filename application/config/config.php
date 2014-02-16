@@ -365,8 +365,8 @@ function __autoload($class) {
 
     if (strpos($class, 'CI_') !== 0) {
         foreach ($path as $dir) {
-            if (file_exists(APPPATH . $dir . '/' . strtolower($class) . '.php'))
-                include_once(APPPATH . $dir . '/' . strtolower($class) . '.php');
+            if (file_exists(APPPATH . $dir . '/' . $class . '.php'))
+                include_once(APPPATH . $dir . '/' . $class . '.php');
         }
     }
 }
