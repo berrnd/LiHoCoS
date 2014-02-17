@@ -27,7 +27,7 @@ class Settings extends SessionController {
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $this->load->model('rooms_model');
-        $this->load->helper('jTable');
+        $this->load->helper('jtable');
         $this->load->helper('plugin');
         $this->load->helper('network');
     }

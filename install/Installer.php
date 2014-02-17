@@ -78,4 +78,12 @@ class Installer {
         return $password;
     }
 
+    function redirect_after_installation() {
+        $redir = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+        $redir .= "://" . $_SERVER['HTTP_HOST'];
+        $redir .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+        $redir = str_replace('install/', '', $redir);
+        header('Location: ' . $redir . 'deploy/after_database_installation');
+    }
+
 }

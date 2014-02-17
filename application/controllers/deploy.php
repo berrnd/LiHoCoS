@@ -12,7 +12,7 @@
  * @property Settings_model $settings_model
  * @property Rooms_model $rooms_model
  */
-class Install extends SessionController {
+class Deploy extends MainController {
 
     public function __construct() {
         parent::__construct();

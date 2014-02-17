@@ -8,6 +8,7 @@
 
         <meta name="description" content="Life and Home Controlling System">
         <meta name="author" content="Bernd Bestel (http://berrnd.de)">
+        <link rel="shortcut icon" href="<?php echo img_url('lihocos.ico'); ?>">
 
         <title><?php echo $title; ?> | LiHoCoS</title>
 

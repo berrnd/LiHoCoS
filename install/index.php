@@ -3,9 +3,13 @@ $dbConfigPath = '../application/config/database.php';
 
 require_once 'Installer.php';
 require_once 'DatabaseInstaller.php';
+require_once 'DemoInstaller.php';
 
 $installer = new Installer();
 $databaseInstaller = new DatabaseInstaller();
+
+if (DemoInstaller::is_demo())
+    DemoInstaller::do_demo_installation();
 
 if ($_POST) {
     if ($installer->validate_post($_POST) == true) {
@@ -20,14 +24,9 @@ if ($_POST) {
         else if ($installer->write_config() == false)
             $message = $installer->show_message('error', 'The database configuration file could not be written, please chmod application/config/database.php file to 777');
 
-        // If no errors, redirect to registration page
-        if (!isset($message)) {
-            $redir = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-            $redir .= "://" . $_SERVER['HTTP_HOST'];
-            $redir .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
-            $redir = str_replace('install/', '', $redir);
-            header('Location: ' . $redir . 'install/after_database_installation');
-        }
+        // If no errors, redirect to application
+        if (!isset($message))
+            $installer->redirect_after_installation();
     }
     else
         $message = $installer->show_message('error', 'Not all fields have been filled in correctly. The host, username, password, and database name are required.');

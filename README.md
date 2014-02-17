@@ -7,6 +7,10 @@ LiHoCoS
 
 > Try it: [http://demo.lihocos.de](http://demo.lihocos.de)
 
+## How to install
+* Just unpack anywhere in your web directory, browse to /install and follow the instructions.
+    * See [INSTALL.md](INSTALL.md) for detailed instructions.
+
 ## Features
 LiHoCoS is mainly split, as its name implies, into two parts
 * Life
