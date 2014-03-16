@@ -12,6 +12,6 @@ class KnownSettings {
     const LATITUDE = 'latitude';
     const LONGITUDE = 'longitude';
     const TIMEZONE = 'timezone';
-    const LOCAL_BROADCAST_ADDRESS = '192.168.1.255';
+    const LOCAL_BROADCAST_ADDRESS = 'local_broadcast_address';
 
 }
