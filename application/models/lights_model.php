@@ -2,6 +2,9 @@
 
 class Lights_model extends Device {
 
+    const LIGHT_STATE_ON = 1;
+    const LIGHT_STATE_OFF = 0;
+
     public function __construct() {
         parent::__construct();
 
@@ -39,6 +42,13 @@ class Lights_model extends Device {
 
     public function get_display_name() {
         return $this->name . ' (' . $this->get_room_name() . ')';
+    }
+
+    public function get_display_state() {
+        if ($this->state == self::LIGHT_STATE_OFF)
+            return lang('Off');
+        else if ($this->state == self::LIGHT_STATE_ON)
+            return lang('On');
     }
 
 }

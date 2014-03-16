@@ -22,6 +22,7 @@ class Plugin extends MainController {
         $this->load->model('sensors_model');
         $this->load->model('windows_model');
         $this->load->helper('plugin');
+        $this->load->helper('network');
     }
 
     public function set_blind_position($blindId, $newPosition) {
@@ -76,7 +77,7 @@ class Plugin extends MainController {
             plugin_ajax_error();
     }
 
-    public function read_sensors() {
+    public function pull_sensors() {
         $sensorPluginName = get_setting(KnownSettings::PLUGIN_SENSORS);
         load_plugin_class(PluginAreas::SENSORS, $sensorPluginName);
         $sensorPlugin = new $sensorPluginName();
@@ -96,13 +97,34 @@ class Plugin extends MainController {
         }
     }
 
+    public function pull_blind_states() {
+        $blindsPluginName = get_setting(KnownSettings::PLUGIN_BLINDS);
+        load_plugin_class(PluginAreas::BLINDS, $blindsPluginName);
+        $blindsPlugin = new $blindsPluginName();
+
+        $blinds = $this->blinds_model->get();
+
+        foreach ($blinds as $blind) {
+            $lastPosition = $blind->position;
+            $currentPosition = $blindsPlugin->get_position($blind);
+
+            if ($lastPosition != $currentPosition) {
+                //Blind has been updated
+
+                $blind->position = $currentPosition;
+                $blind->last_change = mysql_now();
+                $blind->save();
+                $blind->make_history_entry();
+            }
+        }
+    }
+
     public function computer_action($computerId, $action) {
+        $computer = $this->computers_model->get($computerId);
+
         switch ($action) {
             case 'wake':
-                break;
-            case 'hibernate':
-                break;
-            case 'shutdown':
+                wakeOnLan($computer->mac, get_setting(KnownSettings::LOCAL_BROADCAST_ADDRESS));
                 break;
         }
     }

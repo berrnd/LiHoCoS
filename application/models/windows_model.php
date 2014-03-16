@@ -45,4 +45,13 @@ class Windows_model extends Device {
         return $this->name . ' (' . $this->get_room_name() . ')';
     }
 
+    public function get_display_state() {
+        if ($this->state == self::WINDOW_STATE_CLOSED)
+            return lang('Closed');
+        else if ($this->state == self::WINDOW_STATE_OPEN)
+            return lang('Open');
+        else if ($this->state == self::WINDOW_STATE_TILTED)
+            return lang('Tilted');
+    }
+
 }

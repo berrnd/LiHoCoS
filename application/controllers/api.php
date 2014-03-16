@@ -37,4 +37,22 @@ class Api extends SessionController {
         echo json_encode($rows);
     }
 
+//    public function camera_stream($cameraId) {
+//        $camera = $this->cameras_model->get($cameraId);
+//
+//        $url = $camera->mjpeg_stream_url;
+//        $credentials = sprintf('Authorization: Basic %s', base64_encode($camera->username . ':' . $camera->password));
+//        $options = array(
+//            'http' => array(
+//                'method' => 'GET',
+//                'header' => $credentials)
+//        );
+//
+//        $context = stream_context_create($options);
+//
+//        $fp = fopen($url, 'r', false, $context);
+//        fpassthru($fp);
+//        fclose($fp);
+//    }
+
 }

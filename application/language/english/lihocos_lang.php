@@ -84,6 +84,9 @@ $lang['Sensor'] = 'Sensor';
 $lang['Window'] = 'Window';
 $lang['Timezone'] = 'Timezone';
 $lang['Settings saved'] = 'Settings saved';
+$lang['Open'] = 'Open';
+$lang['Closed'] = 'Closed';
+$lang['Tilted'] = 'Tilted';
 
 
 $lang['jTable_lang'] = 'en';

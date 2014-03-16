@@ -32,14 +32,17 @@
                         <tr>
                             <td style="width: 10%;">
                                 <div class="btn-group">
-                                    <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/0'); ?>" type="button" class="btn btn-default action-button"><?php echo lang('Up'); ?></button>
-                                    <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/100'); ?>" type="button" class="btn btn-default action-button"><?php echo lang('Down'); ?></button>
+                                    <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-up"></i></button>
+                                    <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/100'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-down"></i></button>
                                 </div>
                             </td>
                             <td><?php echo $blind->name ?></td>
                             <td><?php echo $blind->get_room_name(); ?></td>
-                            <td><?php echo $blind->position ?></td>
-                            <td><span data-timestamp="<?php echo $blind->last_change ?>" class="moment"></span></td>
+                            <td><?php echo $blind->position ?> %</td>
+                            <td>
+                                <span data-timestamp="<?php echo $blind->last_change ?>" class="moment"></span><br />
+                                <code><?php echo timestamp_to_date_time_string_iso(strtotime($blind->last_change)); ?></code>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -51,7 +54,7 @@
                 <?php foreach ($cameras as $camera) : ?>
                     <div class="col-md-4">
                         <h4><?php echo $camera->name; ?></h4>
-                        <img width="100%" height="100%" class="img-responsive img-rounded" src="<?php echo $camera->mjpeg_stream_url; ?>" />
+                        <img width="100%" height="100%" class="img-responsive img-rounded" src="<?php echo base_url('api/camera_stream/' . $camera->id); ?>" />
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -70,11 +73,7 @@
                     <?php foreach ($computers as $computer) : ?>
                         <tr>
                             <td style="width: 18%;">
-                                <div class="btn-group">
-                                    <button data-success-message="<?php echo lang('Successfully controlled computer'); ?>" data-error-message="<?php echo lang('Computer could not be controlled'); ?>" data-url="<?php echo base_url('plugin/computer_action/' . $computer->id . '/wake'); ?>" type="button" class="btn btn-default action-button"><?php echo lang('Power on'); ?></button>
-                                    <button data-success-message="<?php echo lang('Successfully controlled computer'); ?>" data-error-message="<?php echo lang('Computer could not be controlled'); ?>" data-url="<?php echo base_url('plugin/computer_action/' . $computer->id . '/hibernate'); ?>" type="button" class="btn btn-default action-button"><?php echo lang('Hibernate'); ?></button>
-                                    <button data-success-message="<?php echo lang('Successfully controlled computer'); ?>" data-error-message="<?php echo lang('Computer could not be controlled'); ?>" data-url="<?php echo base_url('plugin/computer_action/' . $computer->id . '/shutdown'); ?>" type="button" class="btn btn-default action-button"><?php echo lang('Power off'); ?></button>
-                                </div>
+                                <button data-success-message="<?php echo lang('Successfully controlled computer'); ?>" data-error-message="<?php echo lang('Computer could not be controlled'); ?>" data-url="<?php echo base_url('plugin/computer_action/' . $computer->id . '/wake'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-off"></i></button>
                             </td>
                             <td><?php echo $computer->name; ?></td>
                             <td><?php echo $computer->fqdn; ?></td>
@@ -99,8 +98,11 @@
                         <tr>
                             <td><?php echo $door->name ?></td>
                             <td><?php echo $door->get_room_name(); ?></td>
-                            <td><?php echo $door->state ?></td>
-                            <td><span data-timestamp="<?php echo $door->last_change ?>" class="moment"></span></td>
+                            <td><?php echo $door->get_display_state(); ?></td>
+                            <td>
+                                <span data-timestamp="<?php echo $door->last_change ?>" class="moment"></span><br />
+                                <code><?php echo timestamp_to_date_time_string_iso(strtotime($door->last_change)); ?></code>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -123,14 +125,17 @@
                         <tr>
                             <td style="width: 10%;">
                                 <div class="btn-group">
-                                    <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/1'); ?>" type="button" class="btn btn-default action-button"><?php echo lang('On'); ?></button>
-                                    <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/0'); ?>" type="button" class="btn btn-default action-button"><?php echo lang('Off'); ?></button>
+                                    <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/1'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-play"></i></button>
+                                    <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-off"></i></button>
                                 </div>
                             </td>
                             <td><?php echo $light->name ?></td>
                             <td><?php echo $light->get_room_name(); ?></td>
-                            <td><?php echo $light->state ?></td>
-                            <td><span data-timestamp="<?php echo $light->last_change ?>" class="moment"></span></td>
+                            <td><?php echo $light->get_display_state(); ?></td>
+                            <td>
+                                <span data-timestamp="<?php echo $light->last_change ?>" class="moment"></span><br />
+                                <code><?php echo timestamp_to_date_time_string_iso(strtotime($light->last_change)); ?></code>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -153,7 +158,10 @@
                             <td><?php echo $sensor->get_room_name(); ?></td>
                             <td><?php echo $sensor->temperature ?></td>
                             <td><?php echo $sensor->relative_humidity ?></td>
-                            <td><span data-timestamp="<?php echo $sensor->last_change ?>" class="moment"></span></td>
+                            <td>
+                                <span data-timestamp="<?php echo $sensor->last_change ?>" class="moment"></span><br />
+                                <code><?php echo timestamp_to_date_time_string_iso(strtotime($sensor->last_change)); ?></code>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -175,8 +183,11 @@
                         <tr>
                             <td><?php echo $window->name ?></td>
                             <td><?php echo $window->get_room_name(); ?></td>
-                            <td><?php echo $window->state ?></td>
-                            <td><span data-timestamp="<?php echo $window->last_change ?>" class="moment"></span></td>
+                            <td><?php echo $window->get_display_state(); ?></td>
+                            <td>
+                                <span data-timestamp="<?php echo $window->last_change ?>" class="moment"></span><br />
+                                <code><?php echo timestamp_to_date_time_string_iso(strtotime($window->last_change)); ?></code>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

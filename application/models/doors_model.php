@@ -40,4 +40,11 @@ class Doors_model extends Device {
         $history_entry->save();
     }
 
+    public function get_display_state() {
+        if ($this->state == self::DOOR_STATE_CLOSED)
+            return lang('Closed');
+        else if ($this->state == self::DOOR_STATE_OPEN)
+            return lang('Open');
+    }
+
 }
