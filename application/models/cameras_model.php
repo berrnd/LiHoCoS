@@ -11,7 +11,7 @@ class Cameras_model extends Device {
     /**
      * @var string
      */
-    public $mjpeg_stream_url;
+    public $snapshot_url;
 
     /**
      * @var string

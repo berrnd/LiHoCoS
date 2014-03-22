@@ -41,7 +41,7 @@ CREATE TABLE `cameras` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `room_id` int(11) DEFAULT NULL,
-  `mjpeg_stream_url` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
+  `snapshot_url` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
   `username` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `password` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
   `plugin_reference` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,

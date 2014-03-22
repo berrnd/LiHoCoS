@@ -29,6 +29,7 @@ class Api extends SessionController {
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $this->load->model('rooms_model');
+        $this->load->helper('output');
     }
 
     public function get_data($model) {
@@ -37,22 +38,29 @@ class Api extends SessionController {
         echo json_encode($rows);
     }
 
-//    public function camera_stream($cameraId) {
-//        $camera = $this->cameras_model->get($cameraId);
-//
-//        $url = $camera->mjpeg_stream_url;
-//        $credentials = sprintf('Authorization: Basic %s', base64_encode($camera->username . ':' . $camera->password));
-//        $options = array(
-//            'http' => array(
-//                'method' => 'GET',
-//                'header' => $credentials)
-//        );
-//
-//        $context = stream_context_create($options);
-//
-//        $fp = fopen($url, 'r', false, $context);
-//        fpassthru($fp);
-//        fclose($fp);
-//    }
+    public function camera_image($cameraId) {
+        no_cache_headers();
+        header('Content-Type: image/jpeg');
+
+        $camera = $this->cameras_model->get($cameraId);
+        $url = $camera->snapshot_url;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_USERPWD, $camera->username . ':' . $camera->password);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        echo $result;
+    }
+
+    public function server_time() {
+        no_cache_headers();
+        header('Content-Type: text/plain');
+
+        echo timestamp_to_date_time_string_iso(time());
+    }
 
 }

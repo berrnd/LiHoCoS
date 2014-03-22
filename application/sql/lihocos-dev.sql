@@ -53,7 +53,7 @@ CREATE TABLE `cameras` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `room_id` int(11) DEFAULT NULL,
-  `mjpeg_stream_url` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
+  `snapshot_url` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
   `username` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `password` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
   `plugin_reference` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `cameras` (
 
 LOCK TABLES `cameras` WRITE;
 /*!40000 ALTER TABLE `cameras` DISABLE KEYS */;
-INSERT INTO `cameras` VALUES (1,'test1',0,'','','',NULL),(2,'1',1,'http://camera/stream','x','x',NULL);
+INSERT INTO `cameras` VALUES (1,'test1',0,'','','',NULL),(2,'Cam1',1,'http://192.168.91.102/video/mjpg.cgi','admin','5tWZlqqW',NULL);
 /*!40000 ALTER TABLE `cameras` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `computers`;
@@ -228,7 +228,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('1c1f174a6ddf643acb9a027edf71d5aa','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392553634,'a:2:{s:9:\"user_data\";s:0:\"\";s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:5:\"bernd\";s:9:\"firstname\";s:5:\"Bernd\";s:8:\"lastname\";s:6:\"Bestel\";s:5:\"email\";s:15:\"bernd@berrnd.de\";s:8:\"password\";s:40:\"537fbe67df61ff679eb89705ad76a7f1c4e05f51\";}}'),('037b558551459cc4c72507fb5be411f7','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393545,''),('0dab09b0a3400f862260b5b381d7242e','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393546,''),('1fba422161e0684486ba44232a33fee7','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393545,''),('2027838fa4eeb0d7c24bb1292f91e5c1','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393546,''),('271462de123dc4e660c13e4fbe50d1d0','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393546,''),('3a3d31c5f01b5f613cd5ae92b83ede24','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393546,''),('539d8257ec11967894858a4d38db6319','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393545,'a:1:{s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:5:\"bernd\";s:9:\"firstname\";s:5:\"Bernd\";s:8:\"lastname\";s:6:\"Bestel\";s:5:\"email\";s:15:\"bernd@berrnd.de\";s:8:\"password\";s:40:\"537fbe67df61ff679eb89705ad76a7f1c4e05f51\";}}'),('53a6815ba55072c8e9e687d510e88c28','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393545,''),('9de659d9aaeda6b9bbebd06bbb4677f3','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393545,''),('b3216a15eac0aa5d53bad5e95fb88132','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392393545,''),('fae2e2d96fe54a59ea4e8ade9d0644ce','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36',1392562280,'');
+INSERT INTO `sessions` VALUES ('9245e5ed9f649f232f0c58a39bfdc46a','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36',1394983627,'a:1:{s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}'),('0d868a66164f40759bb8f0f4156cf612','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36',1395489979,'a:2:{s:9:\"user_data\";s:0:\"\";s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `settings`;

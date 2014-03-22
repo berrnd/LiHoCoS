@@ -320,8 +320,8 @@
                     title: '<?php echo lang('Room'); ?>',
                     options: '<?php echo base_url('settings/ajax_jtable/rooms/list-dropdown/name'); ?>'
                 },
-                mjpeg_stream_url: {
-                    title: '<?php echo lang('MJPEG-Stream-URL'); ?>'
+                snapshot_url: {
+                    title: '<?php echo lang('Snapshot-URL'); ?>'
                 },
                 username: {
                     title: '<?php echo lang('Username'); ?>'

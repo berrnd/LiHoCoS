@@ -53,8 +53,15 @@
             <div class="row">
                 <?php foreach ($cameras as $camera) : ?>
                     <div class="col-md-4">
-                        <h4><?php echo $camera->name; ?></h4>
-                        <img width="100%" height="100%" class="img-responsive img-rounded" src="<?php echo base_url('api/camera_stream/' . $camera->id); ?>" />
+                        <h4>
+                            <?php echo $camera->name; ?>
+                            <small><code class="camera-timestamp"><?php echo timestamp_to_date_time_string_iso(time()); ?></code></small>
+
+                            <button onclick="camera_play('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-play"></i></button>
+                            <button onclick="camera_stop('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i></button>
+                        </h4>
+
+                        <img id="camera-img-<?php echo $camera->id; ?>" width="100%" height="100%" class="img-responsive img-rounded auto-reload" src="<?php echo base_url('api/camera_image/' . $camera->id); ?>" />
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -197,44 +204,71 @@
 </div>
 
 <script>
-    $(document).ready(function() {
+                            $(document).ready(function() {
 
-        $('.action-button').click(function() {
-            var url = $(this).data('url');
-            var successMessage = $(this).data('success-message');
-            var errorMessage = $(this).data('error-message');
+                                $('.action-button').click(function() {
+                                    var url = $(this).data('url');
+                                    var successMessage = $(this).data('success-message');
+                                    var errorMessage = $(this).data('error-message');
+
+                                    $.ajax({
+                                        url: url,
+                                        type: 'POST',
+                                        success: function() {
+                                            toastr['success'](successMessage, '<?php echo lang('Success'); ?>');
+                                        },
+                                        error: function(xhr, status, error) {
+                                            toastr['error'](errorMessage + '\n' + xhr.responseText, '<?php echo lang('Error'); ?>');
+                                        }
+                                    });
+
+                                });
+
+                                //Initalize toastr
+
+                                toastr.options = {
+                                    'closeButton': true,
+                                    'debug': false,
+                                    'positionClass': 'toast-bottom-full-width',
+                                    'onclick': null,
+                                    'showDuration': '300',
+                                    'hideDuration': '1000',
+                                    'timeOut': '5000',
+                                    'extendedTimeOut': '1000',
+                                    'showEasing': 'swing',
+                                    'hideEasing': 'linear',
+                                    'showMethod': 'fadeIn',
+                                    'hideMethod': 'fadeOut'
+                                }
+
+                            });
+
+</script>
+
+<script>
+
+    //Reload camera images every second
+
+    var imgReloadIntervals = new Array();
+
+    function camera_play(imageId) {
+        imgReloadIntervals[imageId] = window.setInterval(function() {
+            img = $('#' + imageId);
+            img.attr('src', img.attr('src'));
 
             $.ajax({
-                url: url,
-                type: 'POST',
-                success: function() {
-                    toastr['success'](successMessage, '<?php echo lang('Success'); ?>');
-                },
-                error: function(xhr, status, error) {
-                    toastr['error'](errorMessage + '\n' + xhr.responseText, '<?php echo lang('Error'); ?>');
+                url: '<?php echo base_url('api/server_time/'); ?>',
+                type: 'GET',
+                success: function(data) {
+                    img.prev().children('small').children('.camera-timestamp').text(data);
                 }
             });
+        }, 1000);
+    }
 
-        });
-
-        //Initalize toastr
-
-        toastr.options = {
-            'closeButton': true,
-            'debug': false,
-            'positionClass': 'toast-bottom-full-width',
-            'onclick': null,
-            'showDuration': '300',
-            'hideDuration': '1000',
-            'timeOut': '5000',
-            'extendedTimeOut': '1000',
-            'showEasing': 'swing',
-            'hideEasing': 'linear',
-            'showMethod': 'fadeIn',
-            'hideMethod': 'fadeOut'
-        }
-
-    });
+    function camera_stop(imageId) {
+        window.clearInterval(imgReloadIntervals[imageId]);
+    }
 
 </script>
 
