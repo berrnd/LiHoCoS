@@ -33,6 +33,8 @@
 
 </script>
 
+<?php $this->load->view('js/lihocos-js'); ?>
+
 </body>
 
 </html>

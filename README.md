@@ -8,8 +8,12 @@ LiHoCoS
 > Try it: [http://demo.lihocos.de](http://demo.lihocos.de)
 
 ## How to install
-* Just unpack anywhere in your web directory, browse to /install and follow the instructions.
-    * See [INSTALL.md](INSTALL.md) for detailed instructions.
+* Just unpack anywhere in your web directory, browse to /install and follow the instructions
+    * See [INSTALL.md](INSTALL.md) for detailed instructions
+
+## How to install
+* Just replace all files but keep application/config/config.php and application/config/database.php
+    * Sometimes some manual actions are required, see [UPDATE.md](UPDATE.md) for detailed instructions
 
 ## Features
 LiHoCoS is mainly split, as its name implies, into two parts

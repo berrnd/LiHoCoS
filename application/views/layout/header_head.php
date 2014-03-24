@@ -30,7 +30,6 @@
         <?php echo js('bootstrap.min'); ?>
         <?php echo third_party_js('metisMenu/jquery.metisMenu'); ?>
         <?php echo js('sb-admin'); ?>
-        <?php echo js('lihocos'); ?>
 
         <!-- Page-Level JS -->
         <?php echo third_party_js('jquery-ui/jquery-ui.min'); ?>

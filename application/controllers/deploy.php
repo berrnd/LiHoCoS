@@ -48,45 +48,50 @@ class Deploy extends MainController {
         $room = new Rooms_model();
         $room->name = lang('Room') . '1';
         $room->save();
+        
+        $firstRoomId = -1;
+        $rooms = $this->rooms_model->get();
+        foreach ($rooms as $room)
+            $firstRoomId = $room->id;
 
         $blind = new Blinds_model();
         $blind->name = lang('Blind') . '1';
-        $blind->room_id = 1;
+        $blind->room_id = $firstRoomId;
         $blind->save();
 
         $camera = new Cameras_model();
         $camera->name = lang('Camera') . '1';
-        $camera->mjpeg_stream_url = 'http://camera/stream';
+        $camera->snapshot_url = 'http://camera/stream';
         $camera->username = 'x';
         $camera->password = 'x';
-        $camera->room_id = 1;
+        $camera->room_id = $firstRoomId;
         $camera->save();
 
         $computer = new Computers_model();
         $computer->name = lang('Computer') . '1';
-        $computer->room_id = 1;
+        $computer->room_id = $firstRoomId;
         $computer->fqdn = 'Computer.domain.local';
         $computer->mac = '00:00:00:00:00:00';
         $computer->save();
 
         $door = new Doors_model();
         $door->name = lang('Door') . '1';
-        $door->room_id = 1;
+        $door->room_id = $firstRoomId;
         $door->save();
 
         $light = new Lights_model();
         $light->name = lang('Light') . '1';
-        $light->room_id = 1;
+        $light->room_id = $firstRoomId;
         $light->save();
 
         $sensor = new Sensors_model();
         $sensor->name = lang('Sensor') . '1';
-        $sensor->room_id = 1;
+        $sensor->room_id = $firstRoomId;
         $sensor->save();
 
         $window = new Windows_model();
         $window->name = lang('Window') . '1';
-        $window->room_id = 1;
+        $window->room_id = $firstRoomId;
         $window->save();
 
         set_setting(KnownSettings::LANGUAGE, 'english');
@@ -98,6 +103,7 @@ class Deploy extends MainController {
         set_setting(KnownSettings::PLUGIN_SENSORS, 'DemoSensorsPlugin');
         set_setting(KnownSettings::PLUGIN_WINDOWS, 'DemoWindowsPlugin');
         set_setting(KnownSettings::TIMEZONE, 'Europe/Berlin');
+        set_setting(KnownSettings::LOCAL_BROADCAST_ADDRESS, '192.168.178.255');
 
         set_setting(KnownSettings::DEFAULT_DATA_INSERTED, '1');
     }

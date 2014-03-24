@@ -38,9 +38,10 @@ class Api extends SessionController {
         echo json_encode($rows);
     }
 
-    public function camera_image($cameraId) {
+    public function camera_snapshot($cameraId) {
         no_cache_headers();
-        header('Content-Type: image/jpeg');
+        header('Content-Type: image/jpg');
+        header('X-Server-Time: ' . timestamp_to_date_time_string_iso(time()));
 
         $camera = $this->cameras_model->get($cameraId);
         $url = $camera->snapshot_url;
@@ -53,7 +54,10 @@ class Api extends SessionController {
         $result = curl_exec($ch);
         curl_close($ch);
 
-        echo $result;
+        if (isset($_GET['base64']))
+            echo chunk_split(base64_encode($result));
+        else
+            echo $result;
     }
 
     public function server_time() {
