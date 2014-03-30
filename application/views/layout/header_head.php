@@ -20,8 +20,8 @@
         <?php echo css('sb-admin'); ?>
 
         <!-- Page-Level CSS -->
-        <?php echo third_party_css('jquery-ui/themes/delta/jquery-ui'); ?>
-        <?php echo third_party_css('jtable/themes/jqueryui/jtable_jqueryui.min'); ?>
+        <?php echo third_party_css('jquery-ui/themes/metro/jquery-ui'); ?>
+        <?php echo third_party_css('jtable/themes/metro/blue/jtable.min'); ?>
         <?php echo third_party_css('toastr/toastr.min'); ?>
         <?php echo third_party_css('morris/morris-0.4.3.min'); ?>
 
