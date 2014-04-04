@@ -35,12 +35,12 @@ class TellStickForSensors extends SensorsPlugin {
             if ($inSensorLines && !string_starts_with($line, 'PROTOCOL') && !empty($line)) {
                 $lineParts = explode("\t", $line);
 
-                if (count($lineParts) == 6) {
+                if (count($lineParts) == 8) {
                     $tellstickId = trim($lineParts[2]);
                     $temperature = trim($lineParts[3]);
                     $relativeHumidity = trim(str_replace('%', '', $lineParts[4]));
-                    $lastUpdated = trim($lineParts[5]);
-
+                    $lastUpdated = trim($lineParts[7]);
+                    
                     if ($tellstickId && $sensor->plugin_reference == $tellstickId &&
                             strtotime($sensor->last_change) < strtotime($lastUpdated)) {
                         $sensor->temperature = $temperature;
@@ -86,12 +86,12 @@ class TellStickForSensors extends SensorsPlugin {
             if ($inSensorLines && !string_starts_with($line, 'PROTOCOL') && !empty($line)) {
                 $lineParts = explode("\t", $line);
 
-                if (count($lineParts) == 6) {
+                if (count($lineParts) == 8) {
                     $tellstickId = trim($lineParts[2]);
                     $temperature = trim($lineParts[3]);
                     $relativeHumidity = trim(str_replace('%', '', $lineParts[4]));
-                    $lastUpdated = trim($lineParts[5]);
-
+                    $lastUpdated = trim($lineParts[7]);
+                    
                     $text = sprintf('ID=%s, Temp=%s, Humidity=%s, LastUpdate=%s', $tellstickId, $temperature, $relativeHumidity, $lastUpdated);
 
                     if ($tellstickId)
