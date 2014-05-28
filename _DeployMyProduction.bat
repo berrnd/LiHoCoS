@@ -9,7 +9,6 @@ copy "%prodWwwRoot%\application\config\config.php" "%temp%\config.php" /Y
 copy "%prodWwwRoot%\application\config\database.php" "%temp%\database.php" /Y
 
 robocopy /MIR "%projectPath%" "%prodWwwRoot%" /XD .git /XD nbproject /XD demo.lihocos.de /XF .gitignore
-del "%prodWwwRoot%\application\config\demo.txt"
 del "%prodWwwRoot%\_*.bat"
 
 rem Restore config files

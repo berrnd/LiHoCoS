@@ -8,7 +8,7 @@ require_once 'DemoInstaller.php';
 $installer = new Installer();
 $databaseInstaller = new DatabaseInstaller();
 
-if (DemoInstaller::is_demo())
+if (is_demo())
     DemoInstaller::do_demo_installation();
 
 if ($_POST) {

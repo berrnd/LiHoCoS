@@ -1,16 +1,15 @@
 <?php
 
-class DemoInstaller {
+include '../application/helpers/application_helper.php';
 
-    public static function is_demo() {
-        return file_exists('../application/config/demo.txt');
-    }
+class DemoInstaller {
 
     public static function do_demo_installation() {
         $installer = new Installer();
         $databaseInstaller = new DatabaseInstaller();
 
-        $demoType = file_get_contents('../application/config/demo.txt');
+        $appInfo = get_application_version_info();
+        $demoType = $appInfo->ReleaseType;
 
         $data = array(
             'hostname' => 'localhost',
