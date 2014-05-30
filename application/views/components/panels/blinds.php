@@ -6,7 +6,7 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th style="width: 250px;">#</th>
                     <th><?php echo lang('Name'); ?></th>
                     <th><?php echo lang('Room'); ?></th>
                     <th><?php echo lang('Position'); ?></th>
@@ -16,7 +16,7 @@
             <tbody>
                 <?php foreach ($blinds as $blind) : ?>
                     <tr>
-                        <td style="min-width: 100px;">
+                        <td>
                             <div class="btn-group">
                                 <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-up"></i></button>
                                 <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/100'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-down"></i></button>

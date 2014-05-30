@@ -6,7 +6,7 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th style="width: 120px;">#</th>
                     <th><?php echo lang('Name'); ?></th>
                     <th><?php echo lang('Room'); ?></th>
                     <th><?php echo lang('State'); ?></th>
@@ -16,7 +16,7 @@
             <tbody>
                 <?php foreach ($lights as $light) : ?>
                     <tr>
-                        <td style="min-width: 100px;">
+                        <td>
                             <div class="btn-group">
                                 <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/1'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-play"></i></button>
                                 <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-off"></i></button>
