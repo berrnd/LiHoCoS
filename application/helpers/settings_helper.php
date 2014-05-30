@@ -13,6 +13,15 @@ function get_setting($key) {
 
 /**
  * @param string $key
+ * @return string
+ */
+function get_internal_setting($key) {
+    $key = '__' . $key;
+    return get_setting($key);
+}
+
+/**
+ * @param string $key
  * @param string $newValue
  */
 function set_setting($key, $newValue) {
@@ -21,6 +30,15 @@ function set_setting($key, $newValue) {
     $setting = $ci->settings_model->get_by_name($key);
     $setting->value = $newValue;
     $setting->save();
+}
+
+/**
+ * @param string $key
+ * @param string $newValue
+ */
+function set_internal_setting($key, $newValue) {
+    $key = '__' . $key;
+    set_setting($key, $newValue);
 }
 
 /**

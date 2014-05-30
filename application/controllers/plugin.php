@@ -43,8 +43,7 @@ class Plugin extends MainController {
             $blind->make_history_entry();
 
             echo 'OK';
-        }
-        else
+        } else
             plugin_ajax_error();
     }
 
@@ -72,51 +71,8 @@ class Plugin extends MainController {
             $light->make_history_entry();
 
             echo 'OK';
-        }
-        else
+        } else
             plugin_ajax_error();
-    }
-
-    public function pull_sensors() {
-        $sensorPluginName = get_setting(KnownSettings::PLUGIN_SENSORS);
-        load_plugin_class(PluginAreas::SENSORS, $sensorPluginName);
-        $sensorPlugin = new $sensorPluginName();
-
-        $sensors = $this->sensors_model->get();
-
-        foreach ($sensors as $sensor) {
-            $originUpdateTime = $sensor->last_change;
-            $sensor = $sensorPlugin->update_sensor_values($sensor);
-
-            if (strtotime($originUpdateTime) < strtotime($sensor->last_change)) {
-                //Sensor has been updated
-
-                $sensor->save();
-                $sensor->make_history_entry();
-            }
-        }
-    }
-
-    public function pull_blind_states() {
-        $blindsPluginName = get_setting(KnownSettings::PLUGIN_BLINDS);
-        load_plugin_class(PluginAreas::BLINDS, $blindsPluginName);
-        $blindsPlugin = new $blindsPluginName();
-
-        $blinds = $this->blinds_model->get();
-
-        foreach ($blinds as $blind) {
-            $lastPosition = $blind->position;
-            $currentPosition = $blindsPlugin->get_position($blind);
-
-            if ($lastPosition != $currentPosition) {
-                //Blind has been updated
-
-                $blind->position = $currentPosition;
-                $blind->last_change = mysql_now();
-                $blind->save();
-                $blind->make_history_entry();
-            }
-        }
     }
 
     public function computer_action($computerId, $action) {
