@@ -1,3 +1,8 @@
+### 0.1.4 (2014-05-30)
+* Added "saved positions" for blinds to quickly use predefined states
+* General fixes and code improvements
+* New "cron system", see UPDATE.md
+
 ### 0.1.3 (2014-03-24)
 * Updated TellStickForSensors-Plugin for TelldusCenter 2.1.2
 
