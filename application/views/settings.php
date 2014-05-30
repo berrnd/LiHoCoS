@@ -301,6 +301,7 @@
                     sorting: false,
                     edit: false,
                     create: false,
+                    listClass: 'jtable-command-column',
                     display: function(parentRow) {
                         var $img = $('<i class="glyphicon glyphicon-list"></i>');
                         $img.click(function() {
