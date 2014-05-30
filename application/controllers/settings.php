@@ -103,12 +103,14 @@ class Settings extends SessionController {
             case 'list-child-table':
                 $rowsAll = $this->$modelClass->get();
                 $rowsFiltered = array();
-                
-                foreach ($rowsAll as $row) {
-                    if ($row->$_REQUEST['column'] == $_REQUEST['value'])
-                        $rowsFiltered[] = $row;
+
+                if (!empty($rowsAll)) {
+                    foreach ($rowsAll as $row) {
+                        if ($row->$_REQUEST['column'] == $_REQUEST['value'])
+                            $rowsFiltered[] = $row;
+                    }
                 }
-                
+
                 echo jtable_result('OK', $rowsFiltered);
                 break;
             case 'create':
