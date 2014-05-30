@@ -23,6 +23,7 @@ class DemoSensorsPlugin extends SensorsPlugin {
      */
     public function update_sensor_values(Sensors_model $sensor) {
         //Querying the current values of the given sensor...
+        log_message('error', 'DemoSensorsPlugin: Sensors values updated');
         return $sensor;
     }
 

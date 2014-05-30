@@ -23,6 +23,7 @@ class DemoLightsPlugin extends LightsPlugin {
      */
     public function switch_on(Lights_model $light) {
         //Switching on the given light...
+        log_message('error', "DemoLightsPlugin: Light $light->name was switched on");
         return TRUE;
     }
 
@@ -31,6 +32,7 @@ class DemoLightsPlugin extends LightsPlugin {
      */
     public function switch_off(Lights_model $light) {
         //Switching off the given light...
+        log_message('error', "DemoLightsPlugin: Light $light->name was switched off");
         return TRUE;
     }
 

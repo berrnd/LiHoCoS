@@ -23,6 +23,7 @@ class DemoBlindsPlugin extends BlindsPlugin {
      */
     public function set_position(Blinds_model $blind, $newPosition) {
         //Controlling the given blind...
+        log_message('error', "DemoBlindsPlugin: Blind $blind->name set to position $newPosition");
         return TRUE;
     }
 
