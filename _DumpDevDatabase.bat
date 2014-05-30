@@ -9,5 +9,5 @@ set mysqlDumpDev=%projectPath%application\sql\lihocos-dev.sql
 
 if %projectPath:~-1%==\ set projectPath=%projectPath:~0,-1%
 
-"%mysqldump%" -u%mysqlUser% -p%mysqlPassword% --opt %mysqlDevDatabase% --no-data --skip-comments --skip-opt > "%mysqlDumpDist%"
+"%mysqldump%" -u%mysqlUser% -p%mysqlPassword% --opt %mysqlDevDatabase% --no-data --skip-comments > "%mysqlDumpDist%"
 "%mysqldump%" -u%mysqlUser% -p%mysqlPassword% --opt %mysqlDevDatabase% --skip-comments > "%mysqlDumpDev%"
