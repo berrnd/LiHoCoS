@@ -41,4 +41,10 @@ class Blinds_model extends Device {
         return $this->name . ' (' . $this->get_room_name() . ')';
     }
 
+    public function get_saved_positions() {
+        $this->load->model('blind_positions_model');
+        $positions = $this->blind_positions_model->get_by_identifier_column('blind_id', $this->id, TRUE);
+        return $positions;
+    }
+
 }

@@ -39,8 +39,7 @@ abstract class GenericModel extends CI_Model {
                 $rows = $query->result();
                 return $this->recast_array(get_class($this), $rows);
             }
-        }
-        else
+        } else
             return $this->get_by_identifier_column('id', $id);
 
         return FALSE;
@@ -49,13 +48,20 @@ abstract class GenericModel extends CI_Model {
     /**
      * @param string $column
      * @param string $key
+     * @param bool $forceArray
      * @return mixed|bool
      */
-    protected function get_by_identifier_column($column, $key) {
+    protected function get_by_identifier_column($column, $key, $forceArray = FALSE) {
         $query = $this->db->get_where($this->table, array($column => $key));
 
-        if ($query->num_rows() > 0)
-            return $this->recast(get_class($this), $query->row());
+        if ($query->num_rows() == 1) {
+            if ($forceArray)
+                return $this->recast_array(get_class($this), $query->result());
+            else
+                return $this->recast(get_class($this), $query->row());
+        }
+        else if ($query->num_rows() > 1)
+            return $this->recast_array(get_class($this), $query->result());
         else
             return FALSE;
     }
@@ -140,8 +146,7 @@ abstract class GenericModel extends CI_Model {
                 $values[] = $row[$column];
 
             return $values;
-        }
-        else
+        } else
             return FALSE;
     }
 

@@ -294,6 +294,47 @@
                 room_id: {
                     title: '<?php echo lang('Room'); ?>',
                     options: '<?php echo base_url('settings/ajax_jtable/rooms/list-dropdown/name'); ?>'
+                },
+                saved_positions: {
+                    title: '<?php echo lang('Saved positions'); ?>',
+                    width: '1%',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function(parentRow) {
+                        var $img = $('<i class="glyphicon glyphicon-list"></i>');
+                        $img.click(function() {
+                            $('#grid-blinds').jtable('openChildTable', $img.closest('tr'), {
+                                title: parentRow.record.name + ' - <?php echo lang('Saved positions'); ?>',
+                                actions: {
+                                    listAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/list-child-table'); ?>' + '?column=blind_id&value=' + parentRow.record.id,
+                                    createAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/create'); ?>',
+                                    updateAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/update'); ?>',
+                                    deleteAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/delete'); ?>'
+                                },
+                                fields: {
+                                    blind_id: {
+                                        type: 'hidden',
+                                        defaultValue: parentRow.record.id
+                                    },
+                                    id: {
+                                        key: true,
+                                        list: false
+                                    },
+                                    name: {
+                                        title: '<?php echo lang('Name'); ?>'
+                                    },
+                                    position: {
+                                        title: '<?php echo lang('Position'); ?>'
+                                    }
+                                }
+                            },
+                            function(data) {
+                                data.childTable.jtable('load');
+                            });
+                        });
+                        return $img;
+                    }
                 }
             },
             sorting: true,

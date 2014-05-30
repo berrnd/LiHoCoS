@@ -18,6 +18,7 @@ class Settings extends SessionController {
         parent::__construct();
 
         $this->load->model('blinds_model');
+        $this->load->model('blind_positions_model');
         $this->load->model('cameras_model');
         $this->load->model('computers_model');
         $this->load->model('doors_model');
@@ -78,7 +79,7 @@ class Settings extends SessionController {
         redirect(base_url('/settings?message=saved'));
     }
 
-    public function ajax_jtable($model, $action, $displayColumnName = FALSE) {
+    public function ajax_jtable($model, $action, $additionalParam = FALSE) {
         $modelClass = $model . '_model';
 
         switch ($action) {
@@ -92,12 +93,23 @@ class Settings extends SessionController {
 
                 foreach ($rows as $row) {
                     $options[] = array(
-                        'DisplayText' => $row->$displayColumnName,
+                        'DisplayText' => $row->$additionalParam,
                         'Value' => $row->id
                     );
                 }
 
                 echo jtable_result('OK', $options);
+                break;
+            case 'list-child-table':
+                $rowsAll = $this->$modelClass->get();
+                $rowsFiltered = array();
+                
+                foreach ($rowsAll as $row) {
+                    if ($row->$_REQUEST['column'] == $_REQUEST['value'])
+                        $rowsFiltered[] = $row;
+                }
+                
+                echo jtable_result('OK', $rowsFiltered);
                 break;
             case 'create':
                 $object = new $modelClass();

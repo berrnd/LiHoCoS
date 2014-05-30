@@ -9,6 +9,23 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `blind_positions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blind_positions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `blind_id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE latin1_german1_ci NOT NULL,
+  `position` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `blind_positions` WRITE;
+/*!40000 ALTER TABLE `blind_positions` DISABLE KEYS */;
+INSERT INTO `blind_positions` VALUES (1,1,'test15',15),(2,1,'5555',5),(3,5,'wqer',3);
+/*!40000 ALTER TABLE `blind_positions` ENABLE KEYS */;
+UNLOCK TABLES;
 DROP TABLE IF EXISTS `blinds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -20,12 +37,12 @@ CREATE TABLE `blinds` (
   `last_change` datetime NOT NULL,
   `plugin_reference` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `blinds` WRITE;
 /*!40000 ALTER TABLE `blinds` DISABLE KEYS */;
-INSERT INTO `blinds` VALUES (1,'test1233',2,10,'0000-00-00 00:00:00','10004'),(5,'test2',1,NULL,'0000-00-00 00:00:00','xx1'),(6,'1',1,0,'2014-03-24 12:40:40',NULL);
+INSERT INTO `blinds` VALUES (1,'test1233',2,15,'2014-05-30 10:25:15','10004'),(5,'test2',1,NULL,'0000-00-00 00:00:00','xx1'),(6,'11',1,0,'2014-03-24 12:40:40',NULL),(7,'n666',1,-1,'2014-05-30 09:29:11',NULL);
 /*!40000 ALTER TABLE `blinds` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `blinds_history`;
@@ -38,12 +55,12 @@ CREATE TABLE `blinds_history` (
   `position` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_blinds_history` (`blind_id`,`timestamp`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `blinds_history` WRITE;
 /*!40000 ALTER TABLE `blinds_history` DISABLE KEYS */;
-INSERT INTO `blinds_history` VALUES (1,1,'0000-00-00 00:00:00',100),(2,1,'0000-00-00 00:00:00',10),(3,6,'2014-03-24 12:40:40',0);
+INSERT INTO `blinds_history` VALUES (1,1,'0000-00-00 00:00:00',100),(2,1,'0000-00-00 00:00:00',10),(3,6,'2014-03-24 12:40:40',0),(4,1,'2014-05-30 10:25:15',15);
 /*!40000 ALTER TABLE `blinds_history` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `cameras`;
@@ -101,7 +118,7 @@ CREATE TABLE `doors` (
 
 LOCK TABLES `doors` WRITE;
 /*!40000 ALTER TABLE `doors` DISABLE KEYS */;
-INSERT INTO `doors` VALUES (1,'0',2,0,'2014-02-16 11:21:50','KEQ0017274:1'),(2,'0',1,NULL,NULL,NULL),(3,'0',1,NULL,NULL,NULL),(4,'1',1,0,'0000-00-00 00:00:00',NULL);
+INSERT INTO `doors` VALUES (1,'0',2,0,'2014-02-16 11:21:50','KEQ0017274:1');
 /*!40000 ALTER TABLE `doors` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `doors_history`;
@@ -228,7 +245,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('cd7b004aa8bca0b004e5af03c537ec30','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36',1395661239,'a:2:{s:9:\"user_data\";s:0:\"\";s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}'),('65670ca1b4307d8584c33bb6d3e77184','127.0.0.1','Java/1.7.0_51',1395650938,''),('5a26c6a250357c3dd71802fc4591696a','127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.14 (KHTML, like Gecko) JavaFX/2.2 Safari/535.14',1395651023,''),('dfdc480c3ddaf1e86ce6141df5ab7e6e','127.0.0.1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.14 (KHTML, like Gecko) JavaFX/2.2 Safari/535.14',1395650935,''),('f0723f97fe6d49567a9b5dc0f71fa817','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36',1395651412,'a:2:{s:9:\"user_data\";s:0:\"\";s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}');
+INSERT INTO `sessions` VALUES ('dcb5bea12bf0c65405fadf3a5dfd5e75','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36',1401438258,'a:2:{s:9:\"user_data\";s:0:\"\";s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}'),('a6069ceb7940434f712cf2425d3f12b0','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36',1401268506,'a:1:{s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `settings`;

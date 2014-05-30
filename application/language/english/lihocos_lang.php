@@ -87,6 +87,7 @@ $lang['Settings saved'] = 'Settings saved';
 $lang['Open'] = 'Open';
 $lang['Closed'] = 'Closed';
 $lang['Tilted'] = 'Tilted';
+$lang['Saved positions'] = 'Saved positions';
 
 
 $lang['jTable_lang'] = 'en';
