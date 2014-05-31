@@ -583,7 +583,7 @@
                                         title: '<?php echo lang('Type'); ?>',
                                         options: [<?php
                                                         foreach (get_class_constants('MacroActionTypes') as $actionType)
-                                                            echo "'$actionType',";
+                                                            echo '{ Value: "' . $actionType . '", DisplayText: "' . lang($actionType) . '" },';
                                                         ?>]
                                     },
                                     action_parameters: {

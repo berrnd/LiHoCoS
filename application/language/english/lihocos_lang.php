@@ -94,6 +94,13 @@ $lang['Description'] = 'Description';
 $lang['Action parameters'] = 'Action parameters';
 $lang['Parameters for action'] = 'Parameters for action';
 $lang['in macro'] = 'in macro';
+$lang['Execute this macro directly'] = 'Execute this macro directly';
+$lang['Successfully executed macro'] = 'Successfully executed macro';
+$lang['Macro execution failed'] = 'Macro execution failed';
+
+//MacroActionTypes
+$lang['switch_light'] = 'Switch light on/off';
+$lang['set_blind_position'] = 'Set blind position';
 
 
 $lang['jTable_lang'] = 'en';
