@@ -39,6 +39,8 @@
         <?php echo third_party_js('toastr/toastr.min'); ?>
         <?php echo third_party_js('morris/raphael-2.1.0.min'); ?>
         <?php echo third_party_js('morris/morris'); ?>
+        <?php echo third_party_js('jquery-deserialize/jquery.deserialize.min'); ?>
+        <?php echo third_party_js('jQuery-fn-serializeObject/jquery-serialize-object'); ?>
 
         <?php if (!lang('jTable_lang') === 'en') : ?>
             <?php echo third_party_js('jtable/localization/jquery.jtable.' . lang('jTable_lang')); ?>

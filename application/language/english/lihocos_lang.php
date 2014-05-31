@@ -88,6 +88,12 @@ $lang['Open'] = 'Open';
 $lang['Closed'] = 'Closed';
 $lang['Tilted'] = 'Tilted';
 $lang['Saved positions'] = 'Saved positions';
+$lang['Macros'] = 'Macros';
+$lang['Macro actions'] = 'Macro actions';
+$lang['Description'] = 'Description';
+$lang['Action parameters'] = 'Action parameters';
+$lang['Parameters for action'] = 'Parameters for action';
+$lang['in macro'] = 'in macro';
 
 
 $lang['jTable_lang'] = 'en';

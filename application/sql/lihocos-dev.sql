@@ -42,7 +42,7 @@ CREATE TABLE `blinds` (
 
 LOCK TABLES `blinds` WRITE;
 /*!40000 ALTER TABLE `blinds` DISABLE KEYS */;
-INSERT INTO `blinds` VALUES (1,'test1233',2,15,'2014-05-30 10:25:15','10004'),(5,'test2',1,NULL,'0000-00-00 00:00:00','xx1'),(6,'11',1,0,'2014-03-24 12:40:40',NULL),(7,'n666',1,-1,'2014-05-30 09:29:11',NULL);
+INSERT INTO `blinds` VALUES (1,'test1233',2,15,'2014-05-30 10:48:59','10004'),(5,'test2',1,20,'2014-05-31 15:41:52','xx1'),(6,'11',1,0,'2014-03-24 12:40:40',NULL),(7,'n666',1,-1,'2014-05-30 09:29:11',NULL);
 /*!40000 ALTER TABLE `blinds` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `blinds_history`;
@@ -55,12 +55,12 @@ CREATE TABLE `blinds_history` (
   `position` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_blinds_history` (`blind_id`,`timestamp`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `blinds_history` WRITE;
 /*!40000 ALTER TABLE `blinds_history` DISABLE KEYS */;
-INSERT INTO `blinds_history` VALUES (1,1,'0000-00-00 00:00:00',100),(2,1,'0000-00-00 00:00:00',10),(3,6,'2014-03-24 12:40:40',0),(4,1,'2014-05-30 10:25:15',15);
+INSERT INTO `blinds_history` VALUES (1,1,'0000-00-00 00:00:00',100),(2,1,'0000-00-00 00:00:00',10),(3,6,'2014-03-24 12:40:40',0),(4,1,'2014-05-30 10:25:15',15),(5,1,'2014-05-30 10:47:45',15),(6,1,'2014-05-30 10:48:59',15),(7,5,'2014-05-31 15:41:52',20);
 /*!40000 ALTER TABLE `blinds_history` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `cameras`;
@@ -155,7 +155,7 @@ CREATE TABLE `lights` (
 
 LOCK TABLES `lights` WRITE;
 /*!40000 ALTER TABLE `lights` DISABLE KEYS */;
-INSERT INTO `lights` VALUES (1,'llight1',1,NULL,NULL,NULL),(2,'1',1,0,'0000-00-00 00:00:00',NULL);
+INSERT INTO `lights` VALUES (1,'llight1',1,NULL,NULL,NULL),(2,'1',1,0,'2014-05-31 15:41:51',NULL);
 /*!40000 ALTER TABLE `lights` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `lights_history`;
@@ -168,12 +168,49 @@ CREATE TABLE `lights_history` (
   `state` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_lights_history` (`light_id`,`timestamp`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `lights_history` WRITE;
 /*!40000 ALTER TABLE `lights_history` DISABLE KEYS */;
+INSERT INTO `lights_history` VALUES (1,2,'2014-05-31 15:23:39',1),(2,2,'2014-05-31 15:23:39',0),(3,2,'2014-05-31 15:41:51',1),(4,2,'2014-05-31 15:41:51',0);
 /*!40000 ALTER TABLE `lights_history` ENABLE KEYS */;
+UNLOCK TABLES;
+DROP TABLE IF EXISTS `macro_actions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `macro_actions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `macro_id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE latin1_german1_ci NOT NULL,
+  `description` varchar(500) COLLATE latin1_german1_ci DEFAULT NULL,
+  `type` varchar(20) COLLATE latin1_german1_ci NOT NULL,
+  `parameters` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `macro_actions` WRITE;
+/*!40000 ALTER TABLE `macro_actions` DISABLE KEYS */;
+INSERT INTO `macro_actions` VALUES (1,1,'test1','sdafsafdasdXX','switch_light','{\"light-id\":\"2\",\"switch-type\":\"on\"}'),(2,1,'t2','','switch_light','{\"light-id\":\"2\",\"switch-type\":\"off\"}'),(3,1,'testblind1','asfsf','set_blind_position','{\"blind-id\":\"5\",\"position\":\"20\"}');
+/*!40000 ALTER TABLE `macro_actions` ENABLE KEYS */;
+UNLOCK TABLES;
+DROP TABLE IF EXISTS `macros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `macros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE latin1_german1_ci NOT NULL,
+  `description` varchar(500) COLLATE latin1_german1_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `macros` WRITE;
+/*!40000 ALTER TABLE `macros` DISABLE KEYS */;
+INSERT INTO `macros` VALUES (1,'testm1','');
+/*!40000 ALTER TABLE `macros` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `rooms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -245,7 +282,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('dcb5bea12bf0c65405fadf3a5dfd5e75','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36',1401438258,'a:2:{s:9:\"user_data\";s:0:\"\";s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}'),('a6069ceb7940434f712cf2425d3f12b0','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36',1401268506,'a:1:{s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}');
+INSERT INTO `sessions` VALUES ('898cfc0a843b1827ee696aead3d942c8','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36',1401543657,'a:2:{s:9:\"user_data\";s:0:\"\";s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}'),('a6069ceb7940434f712cf2425d3f12b0','::1','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36',1401268506,'a:1:{s:4:\"user\";O:8:\"stdClass\":6:{s:2:\"id\";s:1:\"2\";s:8:\"username\";s:5:\"admin\";s:9:\"firstname\";s:5:\"Admin\";s:8:\"lastname\";N;s:5:\"email\";N;s:8:\"password\";s:40:\"d033e22ae348aeb5660fc2140aec35850c4da997\";}}'),('782029a97903b67365f47e9a41fe138d','::1','0',1401543712,''),('41c72df12dcfd0ebb950935485136f28','::1','0',1401542619,''),('6f6011c95093ebf4e4e6c76ffdbd6cdc','::1','0',1401542619,''),('bd28cb7e91fdefb31d295623fcd65c27','::1','0',1401543711,''),('d95099a21105e2e7799238423b40e941','::1','0',1401543711,'');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `settings`;
@@ -257,12 +294,12 @@ CREATE TABLE `settings` (
   `value` text COLLATE latin1_german1_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IX_settings` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (2,'language','en'),(3,'plugin_doors','DemoDoorsPlugin'),(4,'plugin_lights','DemoLightsPlugin'),(5,'plugin_sensors','TellStickForSensors'),(6,'plugin_windows','DemoWindowsPlugin'),(7,'plugin_blinds','DemoBlindsPlugin'),(8,'plugin_RademacherHomePilot_homepilot_base_url','http://192.168.91.101/'),(9,'modelclass','blinds_model'),(10,'id','1'),(11,'value','xx2'),(12,'temp123','1'),(13,'default_data_inserted','1'),(14,'timezone','Europe/Berlin');
+INSERT INTO `settings` VALUES (2,'language','en'),(3,'plugin_doors','DemoDoorsPlugin'),(4,'plugin_lights','DemoLightsPlugin'),(5,'plugin_sensors','TellStickForSensors'),(6,'plugin_windows','DemoWindowsPlugin'),(7,'plugin_blinds','DemoBlindsPlugin'),(8,'plugin_RademacherHomePilot_homepilot_base_url','http://192.168.91.101/'),(9,'modelclass','blinds_model'),(10,'id','1'),(11,'value','xx2'),(12,'temp123','1'),(13,'default_data_inserted','1'),(14,'timezone','Europe/Berlin'),(16,'__cron_job_PullBlindStates_last_execution_time','2014-05-30 11:47:02'),(17,'__cron_job_PullSensors_last_execution_time','2014-05-30 11:49:32');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `users`;

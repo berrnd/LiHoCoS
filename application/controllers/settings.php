@@ -11,6 +11,8 @@
  * @property Users_model $users_model
  * @property Settings_model $settings_model
  * @property Rooms_model $rooms_model
+ * @property Macros_model $macros_model
+ * @property Macro_Actions_model $macro_actions_model
  */
 class Settings extends SessionController {
 
@@ -28,6 +30,8 @@ class Settings extends SessionController {
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $this->load->model('rooms_model');
+        $this->load->model('macros_model');
+        $this->load->model('macro_actions_model');
         $this->load->helper('jtable');
         $this->load->helper('plugin');
         $this->load->helper('network');
@@ -137,6 +141,28 @@ class Settings extends SessionController {
                 echo jtable_result('OK');
                 break;
         }
+    }
+
+    public function get_macro_action_edit_form($macroActionId) {
+        $macroAction = $this->macro_actions_model->get($macroActionId);
+        $macro = $this->macros_model->get($macroAction->macro_id);
+        $lights = $this->lights_model->get();
+        $blinds = $this->blinds_model->get();
+
+        $data = array(
+            'macroAction' => $macroAction,
+            'macro' => $macro,
+            'lights' => $lights,
+            'blinds' => $blinds
+        );
+
+        $this->load->view("components/macro-action-edit-forms/$macroAction->type.php", $data);
+    }
+
+    public function set_macro_action_parameters($macroActionId) {
+        $macroAction = $this->macro_actions_model->get($macroActionId);
+        $macroAction->parameters = $_POST['parameters'];
+        $macroAction->save();
     }
 
 }

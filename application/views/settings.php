@@ -145,6 +145,7 @@
                     <li><a href="#lights" data-toggle="tab"><?php echo lang('Lights'); ?></a></li>
                     <li><a href="#sensors" data-toggle="tab"><?php echo lang('Sensors'); ?></a></li>
                     <li><a href="#windows" data-toggle="tab"><?php echo lang('Windows'); ?></a></li>
+                    <li><a href="#macros" data-toggle="tab"><?php echo lang('Macros'); ?></a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -180,6 +181,10 @@
                     <div class="tab-pane fade" id="windows">
                         <h4><?php echo lang('Windows'); ?></h4>
                         <p><div id="grid-windows"></div></p>
+                    </div>
+                    <div class="tab-pane fade" id="macros">
+                        <h4><?php echo lang('Macros'); ?></h4>
+                        <p><div id="grid-macros"></div></p>
                     </div>
                 </div>
             </div>
@@ -519,6 +524,102 @@
             sorting: true,
             defaultSorting: 'name ASC'
         });
+        
+        $('#grid-macros').jtable({
+            title: ' ',
+            actions: {
+                listAction: '<?php echo base_url('settings/ajax_jtable/macros/list'); ?>',
+                createAction: '<?php echo base_url('settings/ajax_jtable/macros/create'); ?>',
+                updateAction: '<?php echo base_url('settings/ajax_jtable/macros/update'); ?>',
+                deleteAction: '<?php echo base_url('settings/ajax_jtable/macros/delete'); ?>'
+            },
+            fields: {
+                id: {
+                    key: true,
+                    list: false
+                },
+                name: {
+                    title: '<?php echo lang('Name'); ?>',
+                },
+                description: {
+                    title: '<?php echo lang('Description'); ?>',
+                    type: 'textarea'
+                },
+                macro_actions: {
+                    title: '<?php echo lang('Macro actions'); ?>',
+                    width: '1%',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    listClass: 'jtable-command-column',
+                    display: function(parentRow) {
+                        var $img = $('<i class="glyphicon glyphicon-list"></i>');
+                        $img.click(function() {
+                            $('#grid-blinds').jtable('openChildTable', $img.closest('tr'), {
+                                title: parentRow.record.name + ' - <?php echo lang('Macro actions'); ?>',
+                                actions: {
+                                    listAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/list-child-table'); ?>' + '?column=macro_id&value=' + parentRow.record.id,
+                                    createAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/create'); ?>',
+                                    updateAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/update'); ?>',
+                                    deleteAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/delete'); ?>'
+                                },
+                                fields: {
+                                    macro_id: {
+                                        type: 'hidden',
+                                        defaultValue: parentRow.record.id
+                                    },
+                                    id: {
+                                        key: true,
+                                        list: false
+                                    },
+                                    name: {
+                                        title: '<?php echo lang('Name'); ?>'
+                                    },
+                                    description: {
+                                        title: '<?php echo lang('Description'); ?>',
+                                        type: 'textarea'
+                                    },
+                                    type: {
+                                        title: '<?php echo lang('Type'); ?>',
+                                        options: [<?php
+                                                        foreach (get_class_constants('MacroActionTypes') as $actionType)
+                                                            echo "'$actionType',";
+                                                        ?>]
+                                    },
+                                    action_parameters: {
+                                        title: '<?php echo lang('Action parameters'); ?>',
+                                        width: '2%',
+                                        sorting: false,
+                                        edit: false,
+                                        create: false,
+                                        listClass: 'jtable-command-column',
+                                        display: function(parentRow) {
+                                            var $img = $('<i class="glyphicon glyphicon-edit"></i>');
+                                            $img.click(function() {
+                                                $.ajax({
+                                                   url: '<?php echo base_url('settings/get_macro_action_edit_form'); ?>' + '/' + parentRow.record.id,
+                                                   success: function(response){
+                                                     $('#modal-template-content').html(response);
+                                                     $('#modal-template').modal('show');
+                                                   }
+                                                });
+                                            });
+                                            return $img;
+                                        }
+                                    }
+                                }
+                            },
+                            function(data) {
+                                data.childTable.jtable('load');
+                            });
+                        });
+                        return $img;
+                    }
+                }
+            },
+            sorting: true,
+            defaultSorting: 'name ASC'
+        });
 
         $('[id^=grid-]').each(function() {
             var element = $(this);
@@ -548,6 +649,19 @@
 
     });
 </script>
+
+<div id="modal-template" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="modal-template-content" class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <?php
 foreach ($plugins as $plugin) {

@@ -12,6 +12,8 @@
  * @property Users_model $users_model
  * @property Settings_model $settings_model
  * @property Rooms_model $rooms_model
+ * @property Macros_model $macros_model
+ * @property Macro_Actions_model $macro_actions_model
  */
 class Api extends SessionController {
 
@@ -29,6 +31,8 @@ class Api extends SessionController {
         $this->load->model('users_model');
         $this->load->model('settings_model');
         $this->load->model('rooms_model');
+        $this->load->model('macros_model');
+        $this->load->model('macro_actions_model');
         $this->load->helper('output');
     }
 
@@ -65,6 +69,12 @@ class Api extends SessionController {
         header('Content-Type: text/plain');
 
         echo timestamp_to_date_time_string_iso(time());
+    }
+
+    public function execute_macro($macroId) {
+        $macro = $this->macros_model->get($macroId);
+        $macroExecutor = new MacroExecutor($macro);
+        $macroExecutor->execute();
     }
 
 }
