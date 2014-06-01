@@ -1,5 +1,5 @@
 <h4><?php echo lang('Parameters for action') . ' ' . $macroAction->name . ' ' . lang('in macro') . ' ' . $macro->name; ?></h4>
-<form id="macro-form-set-blind-position" role="form">
+<form id="macro-action-edit-form" role="form">
     <div class="form-group">
         <label for="blind-id" class="control-label"><?php echo lang('Blind'); ?></label>
         <select id="blind-id" name="blind-id" class="form-control">
@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
         <label for="position"><?php echo lang('Position'); ?></label>
-        <input type="number" class="form-control" id="position" name="position" placeholder="0 - 100">
+        <input type="number" class="form-control" id="position" name="position" placeholder="0 - 100" min="1" max="100">
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-default"><?php echo lang('Save'); ?></button>
@@ -18,11 +18,12 @@
 </form>
 
 <script>
+
 <?php if (!empty($macroAction->parameters)) : ?>
-        $('#macro-form-set-blind-position').deserialize(JSON.parse('<?php echo $macroAction->parameters; ?>'));
+        $('#macro-action-edit-form').deserialize(JSON.parse('<?php echo $macroAction->parameters; ?>'));
 <?php endif; ?>
 
-    $("#macro-form-set-blind-position").submit(function(event) {
+    $("#macro-action-edit-form").submit(function(event) {
         event.preventDefault();
 
         var parameters = JSON.stringify($(this).serializeObject());
@@ -37,4 +38,5 @@
             }
         });
     });
+
 </script>

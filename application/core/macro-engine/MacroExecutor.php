@@ -3,6 +3,7 @@
 class MacroExecutor {
 
     public function __construct(Macros_model $macro) {
+        $this->ci = & get_instance();
         $this->macro = $macro;
     }
 
@@ -10,6 +11,11 @@ class MacroExecutor {
      * @var Macros_model
      */
     private $macro;
+
+    /**
+     * @var CI_Controller
+     */
+    private $ci;
 
     public function execute() {
         /* @var $macroAction Macro_Actions_model */
@@ -19,18 +25,24 @@ class MacroExecutor {
             switch ($macroAction->type) {
                 case MacroActionTypes::SWITCH_LIGHT:
                     $lightId = $parameters['light-id'];
-                    $onOrOff = 1;
-                    if ($parameters['switch-type'] == 'off')
-                        $onOrOff = 0;
+                    $onOrOff = $parameters['switch-type'];
 
-                    file_get_contents(base_url("plugin/switch_light/$lightId/$onOrOff"));
+                    $this->ci->load->model('lights_model');
+                    $light = $this->ci->lights_model->get($lightId);
+                    $lightController = new LightController($light);
+
+                    $lightController->switch_light($onOrOff);
                     break;
 
                 case MacroActionTypes::SET_BLIND_POSITION:
                     $blindId = $parameters['blind-id'];
                     $position = $parameters['position'];
 
-                    file_get_contents(base_url("plugin/set_blind_position/$blindId/$position"));
+                    $this->ci->load->model('blinds_model');
+                    $blind = $this->ci->blinds_model->get($blindId);
+                    $blindController = new BlindController($blind);
+
+                    $blindController->set_position($position);
                     break;
             }
         }

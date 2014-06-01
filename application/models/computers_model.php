@@ -7,12 +7,12 @@ class Computers_model extends Device {
 
         $this->table = 'computers';
     }
-    
+
     /**
      * @var string
      */
     public $fqdn;
-    
+
     /**
      * @var string
      */

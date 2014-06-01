@@ -7,3 +7,8 @@ function no_cache_headers() {
     header('Cache-Control: post-check=0, pre-check=0', false);
     header('Pragma: no-cache');
 }
+
+function unauthorized_and_exit() {
+    header('HTTP/1.1 401 Unauthorized');
+    exit();
+}

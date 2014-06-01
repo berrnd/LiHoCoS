@@ -46,6 +46,7 @@ class Sensors_model extends Device {
     }
 
     public function make_history_entry() {
+        $this->load->model('sensors_history_model');
         $history_entry = new Sensors_History_model();
         $history_entry->sensor_id = $this->id;
         $history_entry->timestamp = $this->last_change;

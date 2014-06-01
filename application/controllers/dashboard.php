@@ -9,6 +9,7 @@ class Dashboard extends SessionController {
         parent::__construct();
 
         $this->load->model('macros_model');
+        $this->load->model('sensors_model');
     }
 
     public function index() {

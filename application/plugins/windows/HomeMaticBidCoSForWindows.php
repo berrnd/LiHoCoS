@@ -90,9 +90,7 @@ class HomeMaticBidCoSForWindows extends WindowsPlugin {
         $windowState = $xthis->translate_state($hmBidcosState);
 
         //Write new state to database
-
         $window = $ci->windows_model->get_by_plugin_reference($hmBidcosId);
-
         if ($window) {
             $window->last_change = mysql_now();
             $window->state = $windowState;
@@ -108,7 +106,7 @@ class HomeMaticBidCoSForWindows extends WindowsPlugin {
      * @return boolean
      */
     public function bidcos_subscribe() {
-        $callbackUrl = base_url('/plugin/call_function/windows/HomeMaticBidCoSForWindows/xmlrpc_server');
+        $callbackUrl = $this->get_direct_function_url('xmlrpc_server');
 
         $xmlrpcClient = $this->get_xmlrpc_client();
         $xmlrpcRequest = new xmlrpcmsg('init', array(
@@ -128,7 +126,7 @@ class HomeMaticBidCoSForWindows extends WindowsPlugin {
      * @return boolean
      */
     public function bidcos_unsubscribe() {
-        $callbackUrl = base_url('/plugin/call_function/windows/HomeMaticBidCoSForWindows/xmlrpc_server');
+        $callbackUrl = $this->get_direct_function_url('xmlrpc_server');
 
         $xmlrpcClient = $this->get_xmlrpc_client();
         $xmlrpcRequest = new xmlrpcmsg('init', array(
@@ -173,9 +171,8 @@ class HomeMaticBidCoSForWindows extends WindowsPlugin {
                     ));
                     $xmlrpcResponse2 = $xmlrpcClient->send($xmlrpcRequest2);
 
-                    if (!$xmlrpcResponse2->faultCode()) {
+                    if (!$xmlrpcResponse2->faultCode())
                         $deviceDescription = $xmlrpcResponse2->value();
-                    }
 
                     if (string_ends_with($deviceId, ':1'))
                         $devices[] = array($deviceId, $deviceDescription);

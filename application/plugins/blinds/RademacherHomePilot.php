@@ -31,8 +31,7 @@ class RademacherHomePilot extends BlindsPlugin {
                 return TRUE;
             else
                 return FALSE;
-        }
-        else
+        } else
             return FALSE;
     }
 
@@ -49,8 +48,7 @@ class RademacherHomePilot extends BlindsPlugin {
                 return $jsonResponse['device']['statusesMap']['Position'];
             else
                 return FALSE;
-        }
-        else
+        } else
             return FALSE;
     }
 
@@ -73,11 +71,9 @@ class RademacherHomePilot extends BlindsPlugin {
                 foreach ($jsonResponse['devices'] as $node) {
                     $devices[] = array($node['did'], $node['name'] . ' (' . $node['description'] . ')');
                 }
-            }
-            else
+            } else
                 return FALSE;
-        }
-        else
+        } else
             return FALSE;
 
         return $devices;

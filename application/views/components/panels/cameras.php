@@ -14,7 +14,7 @@
                         <button onclick="camera_stop('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i></button>
                     </h4>
 
-                    <img id="camera-img-<?php echo $camera->id; ?>" width="100%" height="100%" class="img-responsive img-rounded auto-reload" data-src-base64="<?php echo base_url('api/camera_snapshot/' . $camera->id); ?>?base64=true" src="<?php echo base_url('api/camera_snapshot/' . $camera->id); ?>" />
+                    <img id="camera-img-<?php echo $camera->id; ?>" width="100%" height="100%" class="img-responsive img-rounded auto-reload" data-src-base64="<?php echo base_url('api/cameras/snapshot/' . $camera->id); ?>?base64=true" src="<?php echo base_url('api/cameras/snapshot/' . $camera->id); ?>" />
                 </div>
             <?php endforeach; ?>
         </div>

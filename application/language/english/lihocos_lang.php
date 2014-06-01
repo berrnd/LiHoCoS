@@ -97,11 +97,13 @@ $lang['in macro'] = 'in macro';
 $lang['Execute this macro directly'] = 'Execute this macro directly';
 $lang['Successfully executed macro'] = 'Successfully executed macro';
 $lang['Macro execution failed'] = 'Macro execution failed';
+$lang['API-Key'] = 'API-Key';
+$lang['Plugin settings for'] = 'Plugin settings for';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
 $lang['set_blind_position'] = 'Set blind position';
 
-
+//None UI strings
 $lang['jTable_lang'] = 'en';
 $lang['momentjs_lang'] = 'en';

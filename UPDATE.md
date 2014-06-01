@@ -4,6 +4,10 @@ Do every step from your current version to (including) the one you want to upgra
 * Execute these SQL statements
     CREATE TABLE macros (id int(11) NOT NULL AUTO_INCREMENT, name varchar(100) COLLATE latin1_german1_ci NOT NULL, description varchar(500) COLLATE latin1_german1_ci NOT NULL, PRIMARY KEY (id), UNIQUE KEY name (name)) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
     CREATE TABLE macro_actions (id int(11) NOT NULL AUTO_INCREMENT, macro_id int(11) NOT NULL, name varchar(100) COLLATE latin1_german1_ci NOT NULL, description varchar(500) COLLATE latin1_german1_ci DEFAULT NULL, type varchar(20) COLLATE latin1_german1_ci NOT NULL, parameters varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL, PRIMARY KEY (id)) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+    ALTER TABLE users ADD api_key VARCHAR(1000) NULL, ADD UNIQUE (api_key);
+    ALTER TABLE users ADD UNIQUE INDEX username (username);
+* Info: Plugin boot functions can now be executed with this url: http://lihocos.tld/api/common/boot?api-key=API_KEY_OF_A_USER
+* You need to redefine all "Switch light on/off" macro actions
 
 ### Version 0.1.4
 * Manually replace the "function __autoload($class)" at the end of your application/config.php file with "include __DIR__ . '/global-include.php';" (or merge your config file with application/config-dist.php)

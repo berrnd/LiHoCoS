@@ -34,6 +34,11 @@ class Users_model extends GenericModel {
     public $password;
 
     /**
+     * @var string
+     */
+    public $api_key;
+
+    /**
      * @return Users_model | Users_model[]
      */
     public function get($id = FALSE) {
@@ -56,12 +61,20 @@ class Users_model extends GenericModel {
             return FALSE;
     }
 
+    /**
+     * @return Users_model
+     */
+    public function get_by_api_key($hashedApiKey) {
+        return $this->get_by_identifier_column('api_key', $hashedApiKey);
+    }
+
     public function get_display_name() {
         return trim("$this->firstname $this->lastname");
     }
 
     protected function on_before_save($dataSaveAction) {
-        $this->password = $this->encrypt->sha1($this->password);
+        if (!is_sha1($this->password))
+            $this->password = $this->encrypt->sha1($this->password);
     }
 
 }

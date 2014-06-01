@@ -73,7 +73,7 @@ abstract class GenericModel extends CI_Model {
         if ($this->get($this->id) != FALSE || $this->id != -1) {
             $this->on_before_save(self::DATA_SAVE_ACTION_UPDATE);
             $this->db->update($this->table, $this, array('id' => $this->id));
-        } else { //Insert
+        } else {
             $this->on_before_save(self::DATA_SAVE_ACTION_INSERT);
 
             $valuesToInsert = array();

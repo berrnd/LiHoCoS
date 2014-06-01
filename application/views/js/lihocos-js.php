@@ -19,27 +19,44 @@
 
     $(document).ready(function() {
 
-        $(document).ready(function() {
+        //Initalize toastr
+        toastr.options = {
+            'closeButton': true,
+            'debug': false,
+            'positionClass': 'toast-bottom-full-width',
+            'onclick': null,
+            'showDuration': '300',
+            'hideDuration': '1000',
+            'timeOut': '5000',
+            'extendedTimeOut': '1000',
+            'showEasing': 'swing',
+            'hideEasing': 'linear',
+            'showMethod': 'fadeIn',
+            'hideMethod': 'fadeOut'
+        };
 
-            //Initalize toastr
+        //Menu page link highlighting
+        var pageId = $('body').data('page-id');
+        var menuElement = $('#side-menu .page-id-' + pageId);
+        menuElement.addClass('active');
+        menuElement.parent().parent().addClass('open');
 
-            toastr.options = {
-                'closeButton': true,
-                'debug': false,
-                'positionClass': 'toast-bottom-full-width',
-                'onclick': null,
-                'showDuration': '300',
-                'hideDuration': '1000',
-                'timeOut': '5000',
-                'extendedTimeOut': '1000',
-                'showEasing': 'swing',
-                'hideEasing': 'linear',
-                'showMethod': 'fadeIn',
-                'hideMethod': 'fadeOut'
-            };
+        //Moment.js
+        moment.lang('<?php echo lang('momentjs_lang'); ?>');
+        $('.moment').each(function() {
+            var element = $(this);
+            var timestamp = element.data('timestamp');
+            element.text(moment(timestamp).fromNow());
+        })
 
-        });
+        //Dropdowns: Select item according to data-selected attribute
+        $('select').each(function() {
+            var element = $(this);
+            var value = element.data('selected');
+            element.val(value);
+        })
 
+        //Init url action butons
         $('.action-button').click(function() {
             var url = $(this).data('url');
             var successMessage = $(this).data('success-message');

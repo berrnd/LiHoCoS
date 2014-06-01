@@ -15,7 +15,7 @@
                 <?php foreach ($computers as $computer) : ?>
                     <tr>
                         <td>
-                            <button data-success-message="<?php echo lang('Successfully controlled computer'); ?>" data-error-message="<?php echo lang('Computer could not be controlled'); ?>" data-url="<?php echo base_url('plugin/computer_action/' . $computer->id . '/wake'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-off"></i></button>
+                            <button data-success-message="<?php echo lang('Successfully controlled computer'); ?>" data-error-message="<?php echo lang('Computer could not be controlled'); ?>" data-url="<?php echo base_url('api/computers/wake/' . $computer->id); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-off"></i></button>
                         </td>
                         <td><?php echo $computer->name; ?></td>
                         <td><?php echo $computer->fqdn; ?></td>

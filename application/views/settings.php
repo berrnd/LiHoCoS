@@ -227,6 +227,11 @@
                     title: '<?php echo lang('Password'); ?>',
                     list: false,
                     type: 'password'
+                },
+                api_key: {
+                    title: '<?php echo lang('API-Key'); ?>',
+                    list: false,
+                    type: 'password'
                 }
             },
             sorting: true,
@@ -307,23 +312,23 @@
                     edit: false,
                     create: false,
                     listClass: 'jtable-command-column',
-                    display: function(parentRow) {
+                                        display: function(parentRow) {
                         var $img = $('<i class="glyphicon glyphicon-list"></i>');
-                        $img.click(function() {
-                            $('#grid-blinds').jtable('openChildTable', $img.closest('tr'), {
+                                            $img.click(function() {
+                                                $('#grid-blinds').jtable('openChildTable', $img.closest('tr'), {
                                 title: parentRow.record.name + ' - <?php echo lang('Saved positions'); ?>',
-                                actions: {
-                                    listAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/list-child-table'); ?>' + '?column=blind_id&value=' + parentRow.record.id,
+                                                                actions: {
+                                                                    listAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/list-child-table'); ?>' + '?column=blind_id&value=' + parentRow.record.id,
                                     createAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/create'); ?>',
                                     updateAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/update'); ?>',
                                     deleteAction: '<?php echo base_url('settings/ajax_jtable/blind_positions/delete'); ?>'
-                                },
-                                fields: {
-                                    blind_id: {
-                                        type: 'hidden',
-                                        defaultValue: parentRow.record.id
-                                    },
-                                    id: {
+                                                                },
+                                                                fields: {
+                                                                    blind_id: {
+                                                                        type: 'hidden',
+                                                                        defaultValue: parentRow.record.id
+                                                                    },
+                                                                    id: {
                                         key: true,
                                         list: false
                                     },
@@ -333,14 +338,14 @@
                                     position: {
                                         title: '<?php echo lang('Position'); ?>'
                                     }
-                                }
-                            },
+                                                                }
+                                        },
                             function(data) {
-                                data.childTable.jtable('load');
-                            });
-                        });
-                        return $img;
-                    }
+                                                    data.childTable.jtable('load');
+                                                });
+                                            });
+                                            return $img;
+                                        }
                 }
             },
             sorting: true,
@@ -524,7 +529,7 @@
             sorting: true,
             defaultSorting: 'name ASC'
         });
-        
+
         $('#grid-macros').jtable({
             title: ' ',
             actions: {
@@ -552,23 +557,23 @@
                     edit: false,
                     create: false,
                     listClass: 'jtable-command-column',
-                    display: function(parentRow) {
+                                        display: function(parentRow) {
                         var $img = $('<i class="glyphicon glyphicon-list"></i>');
-                        $img.click(function() {
-                            $('#grid-blinds').jtable('openChildTable', $img.closest('tr'), {
+                                            $img.click(function() {
+                                                $('#grid-blinds').jtable('openChildTable', $img.closest('tr'), {
                                 title: parentRow.record.name + ' - <?php echo lang('Macro actions'); ?>',
-                                actions: {
-                                    listAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/list-child-table'); ?>' + '?column=macro_id&value=' + parentRow.record.id,
+                                                                actions: {
+                                                                    listAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/list-child-table'); ?>' + '?column=macro_id&value=' + parentRow.record.id,
                                     createAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/create'); ?>',
                                     updateAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/update'); ?>',
                                     deleteAction: '<?php echo base_url('settings/ajax_jtable/macro_actions/delete'); ?>'
-                                },
-                                fields: {
-                                    macro_id: {
-                                        type: 'hidden',
-                                        defaultValue: parentRow.record.id
-                                    },
-                                    id: {
+                                                                },
+                                                                fields: {
+                                                                    macro_id: {
+                                                                        type: 'hidden',
+                                                                        defaultValue: parentRow.record.id
+                                                                    },
+                                                                    id: {
                                         key: true,
                                         list: false
                                     },
@@ -582,9 +587,9 @@
                                     type: {
                                         title: '<?php echo lang('Type'); ?>',
                                         options: [<?php
-                                                        foreach (get_class_constants('MacroActionTypes') as $actionType)
-                                                            echo '{ Value: "' . $actionType . '", DisplayText: "' . lang($actionType) . '" },';
-                                                        ?>]
+                                    foreach (get_class_constants('MacroActionTypes') as $actionType)
+                                        echo '{ Value: "' . $actionType . '", DisplayText: "' . lang($actionType) . '" },';
+                                    ?>]
                                     },
                                     action_parameters: {
                                         title: '<?php echo lang('Action parameters'); ?>',
@@ -595,26 +600,26 @@
                                         listClass: 'jtable-command-column',
                                         display: function(parentRow) {
                                             var $img = $('<i class="glyphicon glyphicon-edit"></i>');
-                                            $img.click(function() {
+                                                                $img.click(function() {
                                                 $.ajax({
-                                                   url: '<?php echo base_url('settings/get_macro_action_edit_form'); ?>' + '/' + parentRow.record.id,
-                                                   success: function(response){
-                                                     $('#modal-template-content').html(response);
-                                                     $('#modal-template').modal('show');
-                                                   }
+                                                    url: '<?php echo base_url('settings/get_macro_action_edit_form'); ?>' + '/' + parentRow.record.id,
+                                                    success: function(response) {
+                                                        $('#modal-template-content').html(response);
+                                                        $('#modal-template').modal('show');
+                                                    }
                                                 });
                                             });
                                             return $img;
                                         }
                                     }
-                                }
-                            },
+                                                                }
+                                        },
                             function(data) {
-                                data.childTable.jtable('load');
-                            });
-                        });
-                        return $img;
-                    }
+                                                    data.childTable.jtable('load');
+                                                });
+                                            });
+                                            return $img;
+                                        }
                 }
             },
             sorting: true,
@@ -626,27 +631,6 @@
             element.jtable('load');
         })
 
-//        $('#settings-form').ajaxForm(function() {
-//            toastr['success']('<?php echo lang('Settings saved'); ?>', '<?php echo lang('Success'); ?>');
-//        });
-
-        //Initalize toastr
-
-//        toastr.options = {
-//            'closeButton': true,
-//            'debug': false,
-//            'positionClass': 'toast-bottom-full-width',
-//            'onclick': null,
-//            'showDuration': '300',
-//            'hideDuration': '1000',
-//            'timeOut': '5000',
-//            'extendedTimeOut': '1000',
-//            'showEasing': 'swing',
-//            'hideEasing': 'linear',
-//            'showMethod': 'fadeIn',
-//            'hideMethod': 'fadeOut'
-//        }
-
     });
 </script>
 
@@ -654,7 +638,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div id="modal-template-content" class="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

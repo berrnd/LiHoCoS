@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div class="modal fade" id="plugin-settings-<?php echo $plugin->id; ?>" tabindex="-1" role="dialog" aria-labelledby="plugin-settings-<?php echo $plugin->id; ?>-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,7 +19,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="plugin-common-<?php echo $plugin->id; ?>">
-                            <br />
+                            <br>
                             <?php foreach ($plugin->settings as $setting) : ?>
                                 <div class="form-group">
                                     <label><?php echo $setting['readableName']; ?></label>
@@ -30,7 +29,7 @@
                             <?php endforeach; ?>
                         </div>
                         <div class="tab-pane fade" id="plugin-device-mapping-<?php echo $plugin->id; ?>">
-                            <br />
+                            <br>
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -57,8 +56,6 @@
                             </table>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close'); ?></button>
@@ -72,9 +69,11 @@
 </div>
 
 <script>
+
     $(document).ready(function() {
         $('.ajax-settings-form').ajaxForm(function() {
             $('#plugin-settings-<?php echo $plugin->id; ?>').modal('hide');
         });
     });
+
 </script>

@@ -30,6 +30,7 @@ class Blinds_model extends Device {
     }
 
     public function make_history_entry() {
+        $this->load->model('blinds_history_model');
         $history_entry = new Blinds_History_model();
         $history_entry->blind_id = $this->id;
         $history_entry->timestamp = $this->last_change;

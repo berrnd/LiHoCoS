@@ -45,8 +45,7 @@ class Auth extends MainController {
         if ($user && $passwordHash === $user->password) {
             $this->session->set_userdata('user', $user);
             return true;
-        }
-        else
+        } else
             return false;
     }
 

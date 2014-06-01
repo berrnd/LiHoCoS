@@ -42,3 +42,11 @@ function guid() {
             . substr($charid, 16, 4) . $hyphen
             . substr($charid, 20, 12));
 }
+
+/**
+ * @param string $string
+ * @return boolean
+ */
+function is_sha1($string) {
+    return (bool) preg_match('/^[0-9a-f]{40}$/i', $string);
+}

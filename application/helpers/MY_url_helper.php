@@ -59,3 +59,11 @@ function third_party_js($js_filename) {
 
     return "<script src=\"$url\"></script>\n";
 }
+
+/**
+ * @return boolean
+ */
+function is_api_request() {
+    $apiRootUrl = base_url('api');
+    return string_starts_with(current_url(), $apiRootUrl);
+}

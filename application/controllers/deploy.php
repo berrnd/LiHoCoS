@@ -48,7 +48,7 @@ class Deploy extends MainController {
         $room = new Rooms_model();
         $room->name = lang('Room') . '1';
         $room->save();
-        
+
         $firstRoomId = -1;
         $rooms = $this->rooms_model->get();
         foreach ($rooms as $room)

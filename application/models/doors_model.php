@@ -33,6 +33,7 @@ class Doors_model extends Device {
     }
 
     public function make_history_entry() {
+        $this->load->model('doors_history_model');
         $history_entry = new Doors_History_model();
         $history_entry->door_id = $this->id;
         $history_entry->timestamp = $this->last_change;

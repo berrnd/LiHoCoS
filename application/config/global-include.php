@@ -1,7 +1,7 @@
 <?php
 
 function __autoload($class) {
-    $path = array('core', 'core/cron', 'core/macro-engine', 'plugins', 'models');
+    $path = array('core', 'core/cron', 'core/macro-engine', 'core/hardware-interfaces', 'plugins', 'models');
 
     if (strpos($class, 'CI_') !== 0) {
         foreach ($path as $dir) {

@@ -88,9 +88,7 @@ class HomeMaticBidCoSForDoors extends DoorsPlugin {
         $doorState = $xthis->translate_state($hmBidcosState);
 
         //Write new state to database
-
         $door = $ci->doors_model->get_by_plugin_reference($hmBidcosId);
-
         if ($door) {
             $door->last_change = mysql_now();
             $door->state = $doorState;
@@ -106,7 +104,7 @@ class HomeMaticBidCoSForDoors extends DoorsPlugin {
      * @return boolean
      */
     public function bidcos_subscribe() {
-        $callbackUrl = base_url('/plugin/call_function/doors/HomeMaticBidCoSForDoors/xmlrpc_server');
+        $callbackUrl = $this->get_direct_function_url('xmlrpc_server');
 
         $xmlrpcClient = $this->get_xmlrpc_client();
         $xmlrpcRequest = new xmlrpcmsg('init', array(
@@ -126,7 +124,7 @@ class HomeMaticBidCoSForDoors extends DoorsPlugin {
      * @return boolean
      */
     public function bidcos_unsubscribe() {
-        $callbackUrl = base_url('/plugin/call_function/doors/HomeMaticBidCoSForDoors/xmlrpc_server');
+        $callbackUrl = $this->get_direct_function_url('xmlrpc_server');
 
         $xmlrpcClient = $this->get_xmlrpc_client();
         $xmlrpcRequest = new xmlrpcmsg('init', array(
@@ -171,9 +169,8 @@ class HomeMaticBidCoSForDoors extends DoorsPlugin {
                     ));
                     $xmlrpcResponse2 = $xmlrpcClient->send($xmlrpcRequest2);
 
-                    if (!$xmlrpcResponse2->faultCode()) {
+                    if (!$xmlrpcResponse2->faultCode())
                         $deviceDescription = $xmlrpcResponse2->value();
-                    }
 
                     if (string_ends_with($deviceId, ':1'))
                         $devices[] = array($deviceId, $deviceDescription);

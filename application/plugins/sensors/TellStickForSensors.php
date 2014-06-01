@@ -40,7 +40,7 @@ class TellStickForSensors extends SensorsPlugin {
                     $temperature = trim($lineParts[3]);
                     $relativeHumidity = trim(str_replace('%', '', $lineParts[4]));
                     $lastUpdated = trim($lineParts[7]);
-                    
+
                     if ($tellstickId && $sensor->plugin_reference == $tellstickId &&
                             strtotime($sensor->last_change) < strtotime($lastUpdated)) {
                         $sensor->temperature = $temperature;
@@ -62,8 +62,7 @@ class TellStickForSensors extends SensorsPlugin {
         if ($cachedOutput === FALSE) {
             $output = shell_exec('"' . $this->get_setting('tellstick_tdtool_path') . '"' . ' ' . $params);
             $this->ci->cache->save($cacheKey, $output, 10);
-        }
-        else
+        } else
             $output = $cachedOutput;
 
         return $output;
@@ -91,7 +90,7 @@ class TellStickForSensors extends SensorsPlugin {
                     $temperature = trim($lineParts[3]);
                     $relativeHumidity = trim(str_replace('%', '', $lineParts[4]));
                     $lastUpdated = trim($lineParts[7]);
-                    
+
                     $text = sprintf('ID=%s, Temp=%s, Humidity=%s, LastUpdate=%s', $tellstickId, $temperature, $relativeHumidity, $lastUpdated);
 
                     if ($tellstickId)

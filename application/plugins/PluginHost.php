@@ -108,4 +108,13 @@ abstract class PluginHost {
         return FALSE;
     }
 
+    /**
+     * Returns the url to directly call a plugin function (this can not have parameters)
+     * @param string $functionName
+     */
+    protected function get_direct_function_url($functionName) {
+        $apiKey = current_user_api_key();
+        return base_url("/api/call_plugin_function/$this->pluginArea/$this->id/$functionName?api-key=$apiKey");
+    }
+
 }

@@ -1,7 +1,7 @@
 <?php $this->load->view('layout/header_head'); ?>
 <?php $this->load->view('layout/header_body_blank'); ?>
 
-<div class="col-md-4 col-md-offset-4">
+<div class="col-lg-4 col-lg-offset-4">
     <div class="login-panel panel panel-default text-center">
         <?php if (isset($_GET['message']) && $_GET['message'] === 'bad') : ?>
             <div class="alert alert-danger">

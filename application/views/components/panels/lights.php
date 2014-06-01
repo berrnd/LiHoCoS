@@ -18,8 +18,8 @@
                     <tr>
                         <td>
                             <div class="btn-group">
-                                <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/1'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-play"></i></button>
-                                <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('plugin/switch_light/' . $light->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-off"></i></button>
+                                <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('api/lights/switch_light/' . $light->id . '/1'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-play"></i></button>
+                                <button data-success-message="<?php echo lang('Successfully controlled light'); ?>" data-error-message="<?php echo lang('Light could not be controlled'); ?>" data-url="<?php echo base_url('api/lights/switch_light/' . $light->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-off"></i></button>
                             </div>
                         </td>
                         <td><?php echo $light->name ?></td>

@@ -18,15 +18,15 @@
                     <tr>
                         <td>
                             <div class="btn-group">
-                                <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-up"></i></button>
-                                <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $blind->id . '/100'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-down"></i></button>
+                                <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('api/blinds/set_position/' . $blind->id . '/0'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-up"></i></button>
+                                <button data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('api/blinds/set_position/' . $blind->id . '/100'); ?>" type="button" class="btn btn-default action-button"><i class="glyphicon glyphicon-arrow-down"></i></button>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?php echo lang('Saved positions'); ?> <i class="caret"></i></button>
                                     <ul class="dropdown-menu" role="menu">
                                         <?php $savedPositions = $blind->get_saved_positions(); ?>
                                         <?php if ($savedPositions) : ?>
                                             <?php foreach ($savedPositions as $savedPosition) : ?>
-                                                <li><a data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('plugin/set_blind_position/' . $savedPosition->blind_id . '/' . $savedPosition->position); ?>" type="button" class="action-button"><?php echo $savedPosition->name; ?></a></li>
+                                                <li><a data-success-message="<?php echo lang('Successfully controlled blind'); ?>" data-error-message="<?php echo lang('Blind could not be controlled'); ?>" data-url="<?php echo base_url('api/blinds/set_position/' . $savedPosition->blind_id . '/' . $savedPosition->position); ?>" type="button" class="action-button"><?php echo $savedPosition->name; ?></a></li>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </ul>
