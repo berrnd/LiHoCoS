@@ -9,7 +9,7 @@ class SessionController extends MainController {
     }
 
     private function check_session() {
-        if (is_api_request()) {
+        if (is_api_request() && !$this->session->userdata('user')) {
             $this->load->model('users_model');
             $this->load->helper('output');
 
