@@ -3,7 +3,7 @@
 /**
  * @property Blinds_model $blinds_model
  */
-class Blinds extends SessionController {
+class Blinds extends ApiController {
 
     public function __construct() {
         parent::__construct();
@@ -17,9 +17,9 @@ class Blinds extends SessionController {
         $blindController = new BlindController($blind);
 
         if ($blindController->set_position($newPosition))
-            echo 'OK';
+            $this->api_output(TRUE, "Blind set to position $position", NULL);
         else
-            plugin_ajax_error();
+            $this->api_output(FALSE, 'Blind controlling failed, check log', NULL);
     }
 
 }

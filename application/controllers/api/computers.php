@@ -3,7 +3,7 @@
 /**
  * @property Computers_model $computers_model
  */
-class Computers extends SessionController {
+class Computers extends ApiController {
 
     public function __construct() {
         parent::__construct();
@@ -16,6 +16,8 @@ class Computers extends SessionController {
         $computer = $this->computers_model->get($computerId);
         $computerController = new ComputerController($computer);
         $computerController->wake();
+
+        $this->api_output(TRUE, 'Magic packet sent', NULL);
     }
 
 }

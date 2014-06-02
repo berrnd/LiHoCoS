@@ -3,7 +3,7 @@
 /**
  * @property Cameras_model $cameras_model
  */
-class Cameras extends SessionController {
+class Cameras extends ApiController {
 
     public function __construct() {
         parent::__construct();

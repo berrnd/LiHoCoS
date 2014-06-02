@@ -3,7 +3,7 @@
 /**
  * @property Macros_model $macros_model
  */
-class Macros extends SessionController {
+class Macros extends ApiController {
 
     public function __construct() {
         parent::__construct();
@@ -15,6 +15,8 @@ class Macros extends SessionController {
         $macro = $this->macros_model->get($macroId);
         $macroExecutor = new MacroExecutor($macro);
         $macroExecutor->execute();
+
+        $this->api_output(TRUE, 'Macro successfully executed', NULL);
     }
 
 }

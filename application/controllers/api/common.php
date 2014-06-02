@@ -1,12 +1,13 @@
 <?php
 
-class Common extends SessionController {
+class Common extends ApiController {
 
     public function get_data($model) {
         $modelClass = $model . '_model';
         $this->load->model($modelClass);
         $rows = $this->$modelClass->get();
-        echo json_encode($rows);
+
+        $this->api_output(TRUE, 'Success', $rows);
     }
 
     public function boot() {
@@ -20,6 +21,8 @@ class Common extends SessionController {
                 $plugin->$bootFunctionName();
             }
         }
+
+        $this->api_output(TRUE, 'Boot done', NULL);
     }
 
     public function call_plugin_function($pluginArea, $pluginClassName, $functionName) {
@@ -28,6 +31,8 @@ class Common extends SessionController {
         load_plugin_class($pluginArea, $pluginClassName);
         $plugin = new $pluginClassName();
         $plugin->$functionName();
+
+        $this->api_output(TRUE, 'No error', NULL);
     }
 
 }

@@ -3,7 +3,7 @@
 /**
  * @property Lights_model $lights_model
  */
-class Lights extends SessionController {
+class Lights extends ApiController {
 
     public function __construct() {
         parent::__construct();
@@ -17,9 +17,9 @@ class Lights extends SessionController {
         $lightController = new LightController($light);
 
         if ($lightController->switch_light($onOrOff))
-            echo 'OK';
+            $this->api_output(TRUE, 'Light successfully controlled', NULL);
         else
-            plugin_ajax_error();
+            $this->api_output(FALSE, 'Light controlling failed, check log', NULL);
     }
 
 }
