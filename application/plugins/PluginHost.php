@@ -114,7 +114,7 @@ abstract class PluginHost {
      */
     protected function get_direct_function_url($functionName) {
         $apiKey = current_user_api_key();
-        return base_url("/api/call_plugin_function/$this->pluginArea/$this->id/$functionName?api-key=$apiKey");
+        return base_url("/api/common/call_plugin_function/$this->pluginArea/$this->id/$functionName?api-key=$apiKey");
     }
 
 }
