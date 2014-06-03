@@ -23,7 +23,8 @@
         <?php echo third_party_css('jquery-ui/themes/metro/jquery-ui'); ?>
         <?php echo third_party_css('jtable/themes/metro/blue/jtable.min'); ?>
         <?php echo third_party_css('toastr/toastr.min'); ?>
-        <?php echo third_party_css('morris/morris-0.4.3.min'); ?>
+        <?php echo third_party_css('nvd3/nv.d3.min'); ?>
+        <?php echo third_party_css('bootstrap-daterangepicker/daterangepicker-bs3'); ?>
 
         <!-- Core JS -->
         <?php echo third_party_js('jquery/jquery-1.10.2.min'); ?>
@@ -37,10 +38,11 @@
         <?php echo third_party_js('jquery-form/jquery.form.min'); ?>
         <?php echo third_party_js('moment-js/moment-with-langs.min'); ?>
         <?php echo third_party_js('toastr/toastr.min'); ?>
-        <?php echo third_party_js('morris/raphael-2.1.0.min'); ?>
-        <?php echo third_party_js('morris/morris'); ?>
         <?php echo third_party_js('jquery-deserialize/jquery.deserialize.min'); ?>
         <?php echo third_party_js('jQuery-fn-serializeObject/jquery-serialize-object'); ?>
+        <?php echo third_party_js('nvd3/d3.v3.min'); ?>
+        <?php echo third_party_js('nvd3/nv.d3.min'); ?>
+        <?php echo third_party_js('bootstrap-daterangepicker/daterangepicker'); ?>
 
         <?php if (!lang('jTable_lang') === 'en') : ?>
             <?php echo third_party_js('jtable/localization/jquery.jtable.' . lang('jTable_lang')); ?>

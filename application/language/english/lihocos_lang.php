@@ -99,6 +99,21 @@ $lang['Successfully executed macro'] = 'Successfully executed macro';
 $lang['Macro execution failed'] = 'Macro execution failed';
 $lang['API-Key'] = 'API-Key';
 $lang['Plugin settings for'] = 'Plugin settings for';
+$lang['Time'] = 'Time';
+$lang['Sensor temperature history'] = 'Sensor temperature history';
+$lang['Today'] = 'Today';
+$lang['Yesterday'] = 'Yesterday';
+$lang['Last Week'] = 'Last Week';
+$lang['This Month'] = 'This Month';
+$lang['Last Month'] = 'Last Month';
+$lang['From'] = 'From';
+$lang['To'] = 'To';
+$lang['Apply'] = 'Apply';
+$lang['Cancel'] = 'Cancel';
+$lang['Sensor humidity history'] = 'Sensor humidity history';
+$lang['Humidity'] = 'Humidity';
+$lang['Reporting'] = 'Reporting';
+$lang['Sensor History'] = 'Sensor History';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
@@ -107,3 +122,6 @@ $lang['set_blind_position'] = 'Set blind position';
 //None UI strings
 $lang['jTable_lang'] = 'en';
 $lang['momentjs_lang'] = 'en';
+$lang['js_short_date_format'] = 'DD.MM.YYYY';
+$lang['php_short_date_format'] = 'd.m.Y';
+$lang['d3js_long_date_format'] = '%d.%m.%y %H:%M';

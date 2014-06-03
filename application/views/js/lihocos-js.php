@@ -17,6 +17,18 @@
         return date.split('T').join(' ');
     }
 
+    Date.prototype.getUnixTimestamp = function() {
+        return this.getTime() / 1000;
+    };
+
+    function HtmlEncode(text) {
+        return $('<div/>').text(text).html();
+    }
+
+    function HtmlDecode(text) {
+        return $('<div/>').html(text).text();
+    }
+
     $(document).ready(function() {
 
         //Initalize toastr

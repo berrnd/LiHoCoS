@@ -171,6 +171,26 @@ abstract class GenericModel extends CI_Model {
     }
 
     /**
+     * @param array $select
+     * @return array|bool
+     */
+    //TODO: Unfiltered SQL is not good!
+    public function get_custom_select($select, $forceArray = FALSE) {
+        $query = $this->db->query($select);
+
+        if ($query->num_rows() == 1) {
+            if ($forceArray)
+                return $this->recast_array(get_class($this), $query->result());
+            else
+                return $this->recast(get_class($this), $query->row());
+        }
+        else if ($query->num_rows() > 1)
+            return $this->recast_array(get_class($this), $query->result());
+        else
+            return FALSE;
+    }
+
+    /**
      * Override this function to change values before data is written to the database
      */
     protected function on_before_save($dataSaveAction) {

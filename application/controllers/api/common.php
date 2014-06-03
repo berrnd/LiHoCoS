@@ -2,10 +2,15 @@
 
 class Common extends ApiController {
 
+    //TODO: Unfiltered SQL is not good!
     public function get_data($model) {
         $modelClass = $model . '_model';
         $this->load->model($modelClass);
-        $rows = $this->$modelClass->get();
+
+        if (empty($_REQUEST['custom-select']))
+            $rows = $this->$modelClass->get();
+        else
+            $rows = $this->$modelClass->get_custom_select(urldecode($_REQUEST['custom-select']), TRUE);
 
         $this->api_output(TRUE, 'Success', $rows);
     }
