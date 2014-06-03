@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <?php echo lang('Sensor temperature history'); ?>
-        <div id="date-range" class="pull-right">
+        <div id="date-range-temperature-chart" class="pull-right">
             <i class="fa fa-calendar fa-lg"></i>
             <span><?php echo date(lang('php_short_date_format'), strtotime('now')); ?> - <?php echo date(lang('php_short_date_format')); ?></span> <i class="caret"></i>
         </div>
@@ -14,30 +14,37 @@
 <script>
     $(document).ready(function() {
 
-        window.daterange_start = moment().startOf('day').toDate().getUnixTimestamp();
-        window.daterange_end = new Date().getUnixTimestamp();
+        var MYSQL_DATETIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
+
+        window.tempchart = {};
+        window.tempchart.daterange_start = moment().startOf('day').format(MYSQL_DATETIME_FORMAT);
+        window.tempchart.daterange_end = moment().format(MYSQL_DATETIME_FORMAT);
+
         function reload_chart() {
             nv.addGraph(function() {
                 var chart = nv.models.lineChart()
-                        .xScale(d3.time.scale())
-                        .showLegend(true);
-                //.useInteractiveGuideline(true);
+                        .xScale(d3.time.scale());
 
                 chart.xAxis
                         .axisLabel('<?php echo lang('Time') ?>')
                         .tickFormat(function(d) {
                             return d3.time.format('<?php echo lang('d3js_long_date_format'); ?>')(new Date(d))
                         });
+
                 chart.yAxis
                         .axisLabel('<?php echo lang('Temperature') ?>');
+
                 d3.select("#sensors-temperature-line-chart")
                         .datum(get_chart_data())
-                        .transition().duration(500).call(chart);
+                        .transition()
+                        .call(chart);
+
                 nv.utils.windowResize(
                         function() {
                             chart.update();
                         }
                 );
+
                 return chart;
             });
         }
@@ -51,7 +58,7 @@
                 success: function(sensorsResponse) {
                     $.each(sensorsResponse.data, function(i) {
                         var line = {key: sensorsResponse.data[i].name, values: []};
-                        var query = "SELECT sensor_id, timestamp, MAX(temperature) AS temperature FROM sensors_history WHERE sensor_id = " + sensorsResponse.data[i].id + " AND UNIX_TIMESTAMP(timestamp) BETWEEN " + window.daterange_start + " AND " + window.daterange_end + " GROUP BY sensor_id, DATE(timestamp), HOUR(timestamp) %2B ROUND(MINUTE(timestamp) / 30)";
+                        var query = "SELECT sensor_id, timestamp, TRUNCATE(AVG(temperature), 1) as temperature FROM sensors_history WHERE sensor_id = " + sensorsResponse.data[i].id + " AND timestamp BETWEEN '" + window.tempchart.daterange_start + "' AND '" + window.tempchart.daterange_end + "' GROUP BY sensor_id, (60 / 30) * HOUR(timestamp) %2B FLOOR(MINUTE(timestamp) / 30) ORDER BY timestamp";
                         $.ajax({
                             url: '<?php echo base_url('api/common/get_data/sensors_history') ?>',
                             dataType: 'json',
@@ -62,7 +69,8 @@
                                 $.each(sensorsHistoryResponse.data, function(ii) {
                                     line.values.push({
                                         x: Date.parse(sensorsHistoryResponse.data[ii].timestamp),
-                                        y: parseInt(sensorsHistoryResponse.data[ii].temperature)});
+                                        y: parseFloat(sensorsHistoryResponse.data[ii].temperature)
+                                    });
                                 });
                             }
                         });
@@ -73,7 +81,7 @@
             return lines;
         }
 
-        $('#date-range').daterangepicker({
+        $('#date-range-temperature-chart').daterangepicker({
             ranges: {
                 '<?php echo lang('Today'); ?>': [moment(), moment()],
                 '<?php echo lang('Yesterday'); ?>': [moment().subtract('days', 1), moment().subtract('days', 1)],
@@ -81,8 +89,8 @@
                         '<?php echo lang('This Month'); ?>': [moment().startOf('month'), moment().endOf('month')],
                         '<?php echo lang('Last Month'); ?>': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
             },
-            startDate: window.daterange_start,
-            endDate: window.daterange_end,
+            startDate: Date.parse(window.tempchart.daterange_start),
+            endDate: Date.parse(window.tempchart.daterange_end),
             maxDate: new Date(),
             showDropdowns: true,
             format: '<?php echo lang('js_short_date_format'); ?>',
@@ -93,14 +101,16 @@
                 cancelLabel: '<?php echo lang('Cancel'); ?>'
             }
         }, function(start, end) {
-            $('#date-range span').html(start.format('<?php echo lang('js_short_date_format'); ?>') + ' - ' + end.format('<?php echo lang('js_short_date_format'); ?>'));
-            window.daterange_start = start.toDate().getUnixTimestamp();
-            window.daterange_end = end.toDate().getUnixTimestamp();
+            $('#date-range-temperature-chart span').html(start.format('<?php echo lang('js_short_date_format'); ?>') + ' - ' + end.format('<?php echo lang('js_short_date_format'); ?>'));
+            window.tempchart.daterange_start = start.format(MYSQL_DATETIME_FORMAT);
+            window.tempchart.daterange_end = end.format(MYSQL_DATETIME_FORMAT);
+
             setTimeout(function() {
                 reload_chart();
             }, 0);
         }
         );
+
         setTimeout(function() {
             reload_chart();
         }, 0);
