@@ -1,3 +1,9 @@
+### 0.1.5 (2014-06-04)
+* New: Macro system (can be defined in settings and executed on dashboard)
+* Big code cleanup and refactoring
+* Redefined API
+* New: Charts for sensor history
+
 ### 0.1.4 (2014-05-30)
 * Added "saved positions" for blinds to quickly use predefined states
 * General fixes and code improvements
