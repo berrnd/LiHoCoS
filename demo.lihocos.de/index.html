@@ -22,14 +22,15 @@
                             <a href="/stable" class="btn btn-success btn-lg btn-block">Stable</a>
                             <p class="help-block">The last officially released version.<br />
                                 Everything is working as it should.<br />
-                                <code id="stable-version"></code>
+                                <code id="stable-version"></code><br>
+                                <code id="stable-release-date"></code>
                             </p>
                             <hr />
                             <a href="/nightly" class="btn btn-warning btn-lg btn-block">Nightly</a>
                             <p class="help-block">A snapshot from current development.<br />
                                 The latest and greatest features.<br />
                                 Maybe anything or everything is not working correctly.<br />
-                                <code id="nightly-version"></code>
+                                <code id="nightly-release-date"></code>
                             </p>
                         </div>
                     </div>
@@ -40,26 +41,26 @@
         <script src="bootstrap.min.js"></script>
 
         <script>
-
             $(document).ready(function() {
 
-                //Load stable version number
-
+                //Load stable version info
                 $.ajax({
-                    url: 'stable/application/config/version.txt',
+                    url: 'stable/application/config/version.json',
+                    dataType: 'json',
                     async: false,
                     success: function(data) {
-                        $("#stable-version").text('Version: ' + data);
+                        $("#stable-version").text('Version: ' + data.Build);
+                        $("#stable-release-date").text('Release date: ' + data.ReleaseDate);
                     }
                 });
 
-                //Load nightly version number
-
+                //Load nightly version info
                 $.ajax({
-                    url: 'nightly/application/config/version.txt',
+                    url: 'nightly/application/config/version.json',
+                    dataType: 'json',
                     async: false,
                     success: function(data) {
-                        $("#nightly-version").text('Version: ' + data);
+                        $("#nightly-release-date").text('Last updated: ' + data.ReleaseDate);
                     }
                 });
 

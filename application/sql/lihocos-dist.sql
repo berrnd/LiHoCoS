@@ -43,7 +43,7 @@ CREATE TABLE `blinds_history` (
   `position` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_blinds_history` (`blind_id`,`timestamp`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `cameras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -120,7 +120,7 @@ CREATE TABLE `lights_history` (
   `state` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_lights_history` (`light_id`,`timestamp`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `macro_actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -133,7 +133,7 @@ CREATE TABLE `macro_actions` (
   `type` varchar(20) COLLATE latin1_german1_ci NOT NULL,
   `parameters` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `macros`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -168,7 +168,7 @@ CREATE TABLE `sensors` (
   `last_change` datetime DEFAULT NULL,
   `plugin_reference` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `sensors_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -181,7 +181,7 @@ CREATE TABLE `sensors_history` (
   `relative_humidity` decimal(3,1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_sensors_history` (`sensor_id`,`timestamp`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=31964 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `sessions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -205,7 +205,7 @@ CREATE TABLE `settings` (
   `value` text COLLATE latin1_german1_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IX_settings` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -217,7 +217,10 @@ CREATE TABLE `users` (
   `lastname` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `email` varchar(100) COLLATE latin1_german1_ci DEFAULT NULL,
   `password` varchar(1000) COLLATE latin1_german1_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `api_key` varchar(1000) COLLATE latin1_german1_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `api_key` (`api_key`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `windows`;
