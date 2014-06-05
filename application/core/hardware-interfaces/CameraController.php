@@ -4,7 +4,7 @@ class CameraController extends HardwareController {
 
     public function __construct(Cameras_model $camera) {
         parent::__construct();
-        
+
         $this->camera = $camera;
     }
 
@@ -20,6 +20,9 @@ class CameraController extends HardwareController {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $result = curl_exec($ch);
         curl_close($ch);
+
+        if (empty($result))
+            $result = file_get_contents(APPPATH . '/views/img/camera_error.png');
 
         return $result;
     }

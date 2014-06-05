@@ -27,14 +27,7 @@ function wake_on_lan($macAddressHexadecimal, $broadcastAddress) {
  * @return boolean
  */
 function url_exists($url) {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 2);
-    curl_setopt($ch, CURLOPT_NOBODY, 1);
-
-    if (curl_exec($ch) !== FALSE)
-        return TRUE;
-    else
-        return FALSE;
+    if (!$fp = curl_init($url))
+        return false;
+    return true;
 }

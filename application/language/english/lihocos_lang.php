@@ -114,6 +114,7 @@ $lang['Sensor humidity history'] = 'Sensor humidity history';
 $lang['Humidity'] = 'Humidity';
 $lang['Reporting'] = 'Reporting';
 $lang['Sensor History'] = 'Sensor History';
+$lang['This macro was during on installation...'] = 'This macro was created during installation...';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
