@@ -115,6 +115,12 @@ $lang['Humidity'] = 'Humidity';
 $lang['Reporting'] = 'Reporting';
 $lang['Sensor History'] = 'Sensor History';
 $lang['This macro was during on installation...'] = 'This macro was created during installation...';
+$lang['Aggregation level'] = 'Aggregation level';
+$lang['Half hourly'] = 'Half hourly';
+$lang['Hourly'] = 'Hourly';
+$lang['Daily'] = 'Daily';
+$lang['Weekly'] = 'Weekly';
+$lang['Monthly'] = 'Monthly';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';

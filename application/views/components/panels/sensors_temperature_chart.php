@@ -1,10 +1,24 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <?php echo lang('Sensor temperature history'); ?>
-        <div id="date-range-temperature-chart" class="pull-right">
-            <i class="fa fa-calendar fa-lg"></i>
-            <span><?php echo date(lang('php_short_date_format'), strtotime('now')); ?> - <?php echo date(lang('php_short_date_format')); ?></span> <i class="caret"></i>
+        <div class="pull-right">
+            <label for="aggregation-level-temperature-chart"><?php echo lang('Aggregation level'); ?></label>
+            <select data-selected="30" id="aggregation-level-temperature-chart" onChange="window.tempchart.aggregation_level = this.options[this.selectedIndex].value;">
+                <option value="30"><?php echo lang('Half hourly'); ?></option>
+                <option value="60"><?php echo lang('Hourly'); ?></option>
+                <option value="1440"><?php echo lang('Daily'); ?></option>
+                <option value="10080"><?php echo lang('Weekly'); ?></option>
+                <option value="40320"><?php echo lang('Monthly'); ?></option>
+            </select>
+            &nbsp;&nbsp;&nbsp;
+            <span id="date-range-temperature-chart">
+                <i class="fa fa-calendar fa-lg"></i>
+                <span><?php echo date(lang('php_short_date_format'), strtotime('now')); ?> - <?php echo date(lang('php_short_date_format')); ?></span> <i class="caret"></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-default btn-xs" onclick="window.tempchart.reload();"><i class="fa fa-refresh fa-lg"></i></button>
         </div>
+
     </div>
     <div class="panel-body">
         <svg id="sensors-temperature-line-chart" style="height: 600px;" />
@@ -19,8 +33,9 @@
         window.tempchart = {};
         window.tempchart.daterange_start = moment().startOf('day').format(MYSQL_DATETIME_FORMAT);
         window.tempchart.daterange_end = moment().format(MYSQL_DATETIME_FORMAT);
+        window.tempchart.aggregation_level = 30;
 
-        function reload_chart() {
+        window.tempchart.reload = function reload_chart() {
             nv.addGraph(function() {
                 var chart = nv.models.lineChart()
                         .xScale(d3.time.scale());
@@ -47,7 +62,7 @@
 
                 return chart;
             });
-        }
+        };
 
         function get_chart_data() {
             var lines = [];
@@ -58,7 +73,7 @@
                 success: function(sensorsResponse) {
                     $.each(sensorsResponse.data, function(i) {
                         var line = {key: sensorsResponse.data[i].name, values: []};
-                        var query = "SELECT sensor_id, timestamp, TRUNCATE(AVG(temperature), 1) as temperature FROM sensors_history WHERE sensor_id = " + sensorsResponse.data[i].id + " AND timestamp BETWEEN '" + window.tempchart.daterange_start + "' AND '" + window.tempchart.daterange_end + "' GROUP BY sensor_id, (60 / 30) * HOUR(timestamp) %2B FLOOR(MINUTE(timestamp) / 30) ORDER BY timestamp";
+                        var query = "SELECT sensor_id, timestamp, TRUNCATE(AVG(temperature), 1) as temperature FROM sensors_history WHERE sensor_id = " + sensorsResponse.data[i].id + " AND timestamp BETWEEN '" + window.tempchart.daterange_start + "' AND '" + window.tempchart.daterange_end + "' GROUP BY sensor_id, (60 / " + window.tempchart.aggregation_level + ") * HOUR(timestamp) %2B FLOOR(MINUTE(timestamp) / " + window.tempchart.aggregation_level + ") ORDER BY timestamp";
                         $.ajax({
                             url: '<?php echo base_url('api/common/get_data/sensors_history') ?>',
                             dataType: 'json',
@@ -104,15 +119,11 @@
             $('#date-range-temperature-chart span').html(start.format('<?php echo lang('js_short_date_format'); ?>') + ' - ' + end.format('<?php echo lang('js_short_date_format'); ?>'));
             window.tempchart.daterange_start = start.format(MYSQL_DATETIME_FORMAT);
             window.tempchart.daterange_end = end.format(MYSQL_DATETIME_FORMAT);
-
-            setTimeout(function() {
-                reload_chart();
-            }, 0);
         }
         );
 
         setTimeout(function() {
-            reload_chart();
+            window.tempchart.reload();
         }, 0);
     });
 </script>
