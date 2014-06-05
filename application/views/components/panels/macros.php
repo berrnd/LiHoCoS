@@ -5,7 +5,7 @@
     <div class="panel-body">
         <?php foreach ($macros as $macro) : ?>
             <div class="btn-group">
-                <?php $macroUrl = base_url('api/macros/execute/' . $macro->id); ?>
+                <?php $macroUrl = api_url('api/macros/execute/' . $macro->id); ?>
                 <button data-success-message="<?php echo lang('Successfully executed macro'); ?>" data-error-message="<?php echo lang('Macro execution failed'); ?>" data-url="<?php echo $macroUrl; ?>" type="button" class="btn btn-default action-button"><?php echo $macro->name; ?></button>
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="caret"></i></button>
                 <ul id="macro-dropdown" class="dropdown-menu" role="menu" style="width: 500%;">

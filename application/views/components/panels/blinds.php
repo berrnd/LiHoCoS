@@ -38,7 +38,7 @@
                         <td><?php echo $blind->position ?> %</td>
                         <td>
                             <span data-timestamp="<?php echo $blind->last_change ?>" class="moment"></span><br />
-                            <code><?php echo timestamp_to_date_time_string_iso(strtotime($blind->last_change)); ?></code>
+                            <code><?php echo format_datetime_user_defined($blind->last_change); ?></code>
                         </td>
                     </tr>
                 <?php endforeach; ?>

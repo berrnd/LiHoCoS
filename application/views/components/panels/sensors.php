@@ -16,11 +16,11 @@
                 <?php foreach ($sensors as $sensor) : ?>
                     <tr>
                         <td><?php echo $sensor->get_room_name(); ?></td>
-                        <td><?php echo $sensor->temperature ?></td>
-                        <td><?php echo $sensor->relative_humidity ?></td>
+                        <td><?php echo round($sensor->temperature, 1) ?> °C</td>
+                        <td><?php echo round($sensor->relative_humidity, 0) ?> %</td>
                         <td>
                             <span data-timestamp="<?php echo $sensor->last_change ?>" class="moment"></span><br />
-                            <code><?php echo timestamp_to_date_time_string_iso(strtotime($sensor->last_change)); ?></code>
+                            <code><?php echo format_datetime_user_defined($sensor->last_change); ?></code>
                         </td>
                     </tr>
                 <?php endforeach; ?>

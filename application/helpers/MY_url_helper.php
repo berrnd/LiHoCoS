@@ -67,3 +67,12 @@ function is_api_request() {
     $apiRootUrl = base_url('api');
     return string_starts_with(current_url(), $apiRootUrl);
 }
+
+/**
+ * @param string $relativePath
+ * @return string
+ */
+function api_url($relativePath) {
+    $apiKey = current_user_api_key();
+    return base_url("$relativePath?api-key=$apiKey");
+}

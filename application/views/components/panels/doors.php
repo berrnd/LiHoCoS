@@ -20,7 +20,7 @@
                         <td><?php echo $door->get_display_state(); ?></td>
                         <td>
                             <span data-timestamp="<?php echo $door->last_change ?>" class="moment"></span><br />
-                            <code><?php echo timestamp_to_date_time_string_iso(strtotime($door->last_change)); ?></code>
+                            <code><?php echo format_datetime_user_defined($door->last_change); ?></code>
                         </td>
                     </tr>
                 <?php endforeach; ?>

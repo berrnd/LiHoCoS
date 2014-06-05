@@ -15,7 +15,7 @@ class Cameras extends ApiController {
     public function snapshot($cameraId) {
         no_cache_headers();
         header('Content-Type: image/jpg');
-        header('X-Server-Time: ' . timestamp_to_date_time_string_iso(time()));
+        header('X-Server-Time: ' . format_datetime_user_defined(mysql_now()));
 
         $camera = $this->cameras_model->get($cameraId);
         $cameraController = new CameraController($camera);

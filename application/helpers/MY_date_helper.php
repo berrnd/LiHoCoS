@@ -34,3 +34,19 @@ function timestamp_to_date_time_string_iso($timestamp) {
 function mysql_now() {
     return timestamp_to_date_time_string_iso(now());
 }
+
+/**
+ * @param string $date
+ * @return string
+ */
+function format_date_user_defined($date) {
+    return date(lang('php_short_date_format'), strtotime($date));
+}
+
+/**
+ * @param string $date
+ * @return string
+ */
+function format_datetime_user_defined($date) {
+    return date(lang('php_long_date_format'), strtotime($date));
+}

@@ -8,7 +8,7 @@
                 <div class="col-md-4">
                     <h4>
                         <?php echo $camera->name; ?>
-                        <small><code class="camera-timestamp"><?php echo timestamp_to_date_time_string_iso(time()); ?></code></small>
+                        <small><code class="camera-timestamp"><?php echo format_datetime_user_defined(mysql_now()); ?></code></small>
 
                         <button onclick="camera_play('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-play"></i></button>
                         <button onclick="camera_stop('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i></button>

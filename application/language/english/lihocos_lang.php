@@ -122,6 +122,8 @@ $lang['set_blind_position'] = 'Set blind position';
 //None UI strings
 $lang['jTable_lang'] = 'en';
 $lang['momentjs_lang'] = 'en';
-$lang['js_short_date_format'] = 'DD.MM.YYYY';
-$lang['php_short_date_format'] = 'd.m.Y';
-$lang['d3js_long_date_format'] = '%d.%m.%y %H:%M';
+$lang['js_short_date_format'] = 'YYYY-MM-YY';
+$lang['js_long_date_format'] = 'YYYY-MM-YY HH:mm:ss';
+$lang['php_short_date_format'] = 'Y-m-d';
+$lang['php_long_date_format'] = 'Y-m-d H:m:s';
+$lang['d3js_long_date_format'] = '%y-%m-%d. %H:%M';
