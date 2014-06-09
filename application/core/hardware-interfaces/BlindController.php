@@ -4,7 +4,7 @@ class BlindController extends HardwareController {
 
     public function __construct(Blinds_model $blind) {
         parent::__construct();
-        
+
         $this->blind = $blind;
         $this->ci->load->helper('plugin');
     }
@@ -28,6 +28,14 @@ class BlindController extends HardwareController {
         }
 
         return $result;
+    }
+
+    public function get_position() {
+        $blindPluginName = get_setting(KnownSettings::PLUGIN_BLINDS);
+        load_plugin_class(PluginAreas::BLINDS, $blindPluginName);
+        $blindPlugin = new $blindPluginName();
+
+        return $blindPlugin->get_position($this->blind);
     }
 
 }

@@ -11,6 +11,7 @@
     <div class="form-group">
         <label for="position"><?php echo lang('Position'); ?></label>
         <input type="number" class="form-control" id="position" name="position" placeholder="0 - 100" min="1" max="100">
+        <a onclick="onclick_load_blind_position_button();" href="#" class="btn"><?php echo lang('Load current position'); ?></a>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-default"><?php echo lang('Save'); ?></button>
@@ -38,5 +39,19 @@
             }
         });
     });
+
+    function onclick_load_blind_position_button() {
+        var blindId = $("#blind-id").val();
+        $.ajax({
+            url: '<?php echo base_url('api/blinds/get_position/') ?>/' + blindId,
+            dataType: 'json',
+            async: false,
+            success: function(apiResponse) {
+                $("#position").val(apiResponse.data.position);
+            }
+        });
+
+        return false;
+    }
 
 </script>

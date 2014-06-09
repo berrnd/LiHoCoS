@@ -336,7 +336,10 @@
                                         title: '<?php echo lang('Name'); ?>'
                                     },
                                     position: {
-                                        title: '<?php echo lang('Position'); ?>'
+                                        title: '<?php echo lang('Position'); ?>',
+                                        input: function(data) {
+                                            return '<input id="Edit-position" type="text" name="position"><a onclick="onclick_load_blind_position_button(' + data.form.find("#Edit-blind_id").val() + ');" href="#" class="btn"><?php echo lang('Load current position'); ?></a>';
+                                        }
                                     }
                                                                 }
                                         },
@@ -632,6 +635,19 @@
         })
 
     });
+
+    function onclick_load_blind_position_button(blindId) {
+        $.ajax({
+            url: '<?php echo base_url('api/blinds/get_position/') ?>/' + blindId,
+            dataType: 'json',
+            async: false,
+            success: function(apiResponse) {
+                $("#Edit-position").val(apiResponse.data.position);
+            }
+        });
+
+        return false;
+    }
 </script>
 
 <div id="modal-template" class="modal fade">

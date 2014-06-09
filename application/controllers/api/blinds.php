@@ -22,4 +22,16 @@ class Blinds extends ApiController {
             $this->api_output(FALSE, 'Blind controlling failed, check log', NULL);
     }
 
+    public function get_position($blindId) {
+        $blind = $this->blinds_model->get($blindId);
+        $blindController = new BlindController($blind);
+
+        $position = $blindController->get_position();
+        $data = array(
+            'position' => $position
+        );
+
+        $this->api_output(TRUE, 'Success', $data);
+    }
+
 }

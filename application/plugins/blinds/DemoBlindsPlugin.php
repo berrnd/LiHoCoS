@@ -32,7 +32,7 @@ class DemoBlindsPlugin extends BlindsPlugin {
      */
     public function get_position(Blinds_model $blind) {
         //Querying the current position of the given blind...
-        return $blind->position;
+        return rand(0, 100);
     }
 
     /**

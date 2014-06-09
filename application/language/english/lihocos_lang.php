@@ -121,6 +121,7 @@ $lang['Hourly'] = 'Hourly';
 $lang['Daily'] = 'Daily';
 $lang['Weekly'] = 'Weekly';
 $lang['Monthly'] = 'Monthly';
+$lang['Load current position'] = 'Load current position';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
