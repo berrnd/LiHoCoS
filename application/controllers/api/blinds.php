@@ -17,7 +17,7 @@ class Blinds extends ApiController {
         $blindController = new BlindController($blind);
 
         if ($blindController->set_position($newPosition))
-            $this->api_output(TRUE, "Blind set to position $position", NULL);
+            $this->api_output(TRUE, "Blind set to position $newPosition", NULL);
         else
             $this->api_output(FALSE, 'Blind controlling failed, check log', NULL);
     }
