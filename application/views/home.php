@@ -3,13 +3,15 @@
 
 <div id="page-content">
     <div class="row">
-        <div class="col-lg-12">
-            <?php $this->load->view('components/panels/blinds'); ?>
-            <?php $this->load->view('components/panels/lights'); ?>
+        <div class="col-lg-6">
             <?php $this->load->view('components/panels/sensors'); ?>
+            <?php $this->load->view('components/panels/lights'); ?>
+            <?php $this->load->view('components/panels/computers'); ?>
+        </div>
+        <div class="col-lg-6">
+            <?php $this->load->view('components/panels/blinds'); ?>
             <?php $this->load->view('components/panels/windows'); ?>
             <?php $this->load->view('components/panels/doors'); ?>
-            <?php $this->load->view('components/panels/computers'); ?>
         </div>
         <div class="col-lg-12">
             <?php $this->load->view('components/panels/cameras'); ?>
