@@ -22,6 +22,8 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="<?php echo base_url('/settings'); ?>"><i class="fa fa-gear fa-fw"></i> <?php echo lang('Settings'); ?></a>
                         </li>
+                        <li><a href="<?php echo base_url('/tools'); ?>"><i class="fa fa-gavel fa-fw"></i> <?php echo lang('Tools'); ?></a>
+                        </li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url('auth/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> <?php echo lang('Logout'); ?></a>
                         </li>

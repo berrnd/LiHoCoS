@@ -123,6 +123,17 @@ $lang['Weekly'] = 'Weekly';
 $lang['Monthly'] = 'Monthly';
 $lang['Load current position'] = 'Load current position';
 $lang['Location History'] = 'Location History';
+$lang['Import Location History from Google Takeout'] = 'Import Location History from Google Takeout';
+$lang['Tools'] = 'Tools';
+$lang['Max. Date'] = 'Max. Date';
+$lang['Location points will be imported including this date'] = 'Location points will be imported including this date';
+$lang['Start Import'] = 'Start Import';
+$lang['of'] = 'of';
+$lang['imported'] = 'imported';
+$lang['Ready'] = 'Ready';
+$lang['If you have a big file, this could take long - just wait until "Ready" shows up.'] = 'If you have a big file, this could take long - just wait until "Ready" shows up.';
+$lang['If checked, you get a SQL statement with which you can import the location points directly into the database.'] = 'If checked, you get a SQL statement with which you can import the location points directly into the database.';
+$lang['Import as SQL'] = 'Import as SQL';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';

@@ -27,6 +27,7 @@
         <?php echo third_party_css('bootstrap-daterangepicker/daterangepicker-bs3'); ?>
         <?php echo third_party_css('leaflet/leaflet'); ?>
         <?php echo third_party_css('leaflet-label/leaflet.label'); ?>
+        <?php echo third_party_css('bootstrap-callout/bootstrap-callout'); ?>
 
         <!-- Core JS -->
         <?php echo third_party_js('jquery/jquery-1.10.2.min'); ?>
