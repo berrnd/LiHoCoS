@@ -31,29 +31,4 @@ class Location_History extends ApiController {
         }
     }
 
-    public function import_from_google_takeout() {
-        $config['upload_path'] = APPPATH . '/cache/';
-        $config['file_name'] = 'google_location_history.json';
-        $config['overwrite'] = TRUE;
-        $config['allowed_types'] = 'zip|json';
-        $config['max_size'] = '0';
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload()) {
-            echo $this->upload->display_errors();
-        } else {
-            echo 'success';
-        }
-//        $jsonRaw = file_get_contents($localFilePath);
-//        $json = json_decode($jsonRaw);
-//
-//        foreach ($json->locations as $location) {
-//            $timestamp = $location->timestampMs;
-//            $latitude = $location->latitudeE7 / 10000000;
-//            $longitude = $location->longitudeE7 / 10000000;
-//            $accuracy = $location->accuracy;
-//        }
-    }
-
 }
