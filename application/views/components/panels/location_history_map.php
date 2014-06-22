@@ -24,7 +24,7 @@
     window.lhmap.daterange_end = moment().format(MYSQL_DATETIME_FORMAT);
 
     window.lhmap.reload = function() {
-        clearMap(window.lhmap.map);
+        window.lhmap.clear();
 
         var query = "SELECT * FROM location_history WHERE timestamp BETWEEN '" + window.lhmap.daterange_start + "' AND '" + window.lhmap.daterange_end + "' ORDER BY timestamp";
         var coordinates = [];
@@ -74,12 +74,13 @@
     }, function(start, end) {
         window.lhmap.daterange_start = start.format(MYSQL_DATETIME_FORMAT);
         window.lhmap.daterange_end = end.format(MYSQL_DATETIME_FORMAT);
+        window.lhmap.displayDateRange();
     }
     );
 
-    function clearMap(map) {
-        for (i in map._layers) {
-            if (map._layers[i]._path != undefined) {
+    window.lhmap.clear = function() {
+        for (i in window.lhmap.map._layers) {
+            if (window.lhmap.map._layers[i]._path != undefined) {
                 try {
                     m.removeLayer(m._layers[i]);
                 }
@@ -90,7 +91,7 @@
         }
     }
 
-    function displayDateRange() {
+    window.lhmap.displayDateRange = function() {
         $('#date-range-location-history-map span').html(moment(window.lhmap.daterange_start).format('<?php echo lang('js_short_date_format'); ?>') + ' - ' + moment(window.lhmap.daterange_end).format('<?php echo lang('js_short_date_format'); ?>'));
     }
 
@@ -105,7 +106,7 @@
         var homeLocation = new L.LatLng(<?php echo get_setting(KnownSettings::LATITUDE); ?>, <?php echo get_setting(KnownSettings::LONGITUDE); ?>);
         window.lhmap.map.setView(homeLocation, 12);
 
-        displayDateRange();
+        window.lhmap.displayDateRange();
         window.lhmap.reload();
     });
 
