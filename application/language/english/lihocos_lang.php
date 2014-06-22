@@ -122,6 +122,7 @@ $lang['Daily'] = 'Daily';
 $lang['Weekly'] = 'Weekly';
 $lang['Monthly'] = 'Monthly';
 $lang['Load current position'] = 'Load current position';
+$lang['Location History'] = 'Location History';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
@@ -130,8 +131,8 @@ $lang['set_blind_position'] = 'Set blind position';
 //None UI strings
 $lang['jTable_lang'] = 'en';
 $lang['momentjs_lang'] = 'en';
-$lang['js_short_date_format'] = 'YYYY-MM-YY';
-$lang['js_long_date_format'] = 'YYYY-MM-YY HH:mm:ss';
+$lang['js_short_date_format'] = 'YYYY-MM-DD';
+$lang['js_long_date_format'] = 'YYYY-MM-DD HH:mm:ss';
 $lang['php_short_date_format'] = 'Y-m-d';
 $lang['php_long_date_format'] = 'Y-m-d H:m:s';
 $lang['d3js_long_date_format'] = '%y-%m-%d. %H:%M';

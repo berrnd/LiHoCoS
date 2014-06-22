@@ -25,6 +25,8 @@
         <?php echo third_party_css('toastr/toastr.min'); ?>
         <?php echo third_party_css('nvd3/nv.d3.min'); ?>
         <?php echo third_party_css('bootstrap-daterangepicker/daterangepicker-bs3'); ?>
+        <?php echo third_party_css('leaflet/leaflet'); ?>
+        <?php echo third_party_css('leaflet-label/leaflet.label'); ?>
 
         <!-- Core JS -->
         <?php echo third_party_js('jquery/jquery-1.10.2.min'); ?>
@@ -43,6 +45,8 @@
         <?php echo third_party_js('nvd3/d3.v3.min'); ?>
         <?php echo third_party_js('nvd3/nv.d3.min'); ?>
         <?php echo third_party_js('bootstrap-daterangepicker/daterangepicker'); ?>
+        <?php echo third_party_js('leaflet/leaflet'); ?>
+        <?php echo third_party_js('leaflet-label/leaflet.label'); ?>
 
         <?php if (!lang('jTable_lang') === 'en') : ?>
             <?php echo third_party_js('jtable/localization/jquery.jtable.' . lang('jTable_lang')); ?>

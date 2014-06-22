@@ -1,5 +1,9 @@
 Do every step from your current version to (including) the one you want to upgrade to
 
+### Version NEXT
+* Execute these SQL statements
+    CREATE TABLE location_history (id int(11) NOT NULL AUTO_INCREMENT, timestamp DATETIME NOT NULL, latitude DECIMAL(10, 8) NOT NULL, longitude DECIMAL(11, 8) NOT NULL, accuracy DECIMAL(18, 3) NULL, PRIMARY KEY (id), UNIQUE KEY name (timestamp, longitude, latitude)) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
 ### Version 0.1.5
 * Execute these SQL statements
     CREATE TABLE macros (id int(11) NOT NULL AUTO_INCREMENT, name varchar(100) COLLATE latin1_german1_ci NOT NULL, description varchar(500) COLLATE latin1_german1_ci NOT NULL, PRIMARY KEY (id), UNIQUE KEY name (name)) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
