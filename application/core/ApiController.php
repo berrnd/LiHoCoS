@@ -19,6 +19,8 @@ class ApiController extends MainController {
 
                 if ($user === FALSE)
                     unauthorized_and_exit();
+                else
+                    $this->session->set_userdata('user', $user);
             } else
                 unauthorized_and_exit();
         }

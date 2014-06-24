@@ -108,8 +108,8 @@ class Deploy extends MainController {
         $macro->save();
 
         set_setting(KnownSettings::LANGUAGE, 'english');
-        set_setting(KnownSettings::LATITUDE, '48.26969');
-        set_setting(KnownSettings::LONGITUDE, '10.82958');
+        set_setting(KnownSettings::HOME_LATITUDE, '48.26969');
+        set_setting(KnownSettings::HOME_LONGITUDE, '10.82958');
         set_setting(KnownSettings::PLUGIN_BLINDS, 'DemoBlindsPlugin');
         set_setting(KnownSettings::PLUGIN_DOORS, 'DemoDoorsPlugin');
         set_setting(KnownSettings::PLUGIN_LIGHTS, 'DemoLightsPlugin');

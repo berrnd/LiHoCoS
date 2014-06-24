@@ -21,6 +21,11 @@ class Cameras extends ApiController {
         $cameraController = new CameraController($camera);
         $image = $cameraController->snapshot();
 
+        if ($image === FALSE) {
+            http_404();
+            return;
+        }
+
         if (isset($_GET['base64']))
             echo chunk_split(base64_encode($image));
         else

@@ -1,4 +1,4 @@
-<?php $this->load->view('js/lihocos-js'); ?>
+<?php $this->load->view('js/lihocos-js-footer'); ?>
 
 </body>
 

@@ -34,8 +34,6 @@
 
 <script>
 
-    var MYSQL_DATETIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
-
     $("#import-form").submit(function(event) {
         event.preventDefault();
 

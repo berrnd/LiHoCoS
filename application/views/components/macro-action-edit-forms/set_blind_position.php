@@ -10,8 +10,12 @@
     </div>
     <div class="form-group">
         <label for="position"><?php echo lang('Position'); ?></label>
-        <input type="number" class="form-control" id="position" name="position" placeholder="0 - 100" min="1" max="100">
-        <a onclick="onclick_load_blind_position_button();" href="#" class="btn"><?php echo lang('Load current position'); ?></a>
+        <div class="input-group">
+            <input type="number" class="form-control" id="position" name="position" placeholder="0 - 100" min="1" max="100">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" onclick="onclick_load_blind_position_button();"><?php echo lang('Load current position'); ?></button>
+            </span >
+        </div>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-default"><?php echo lang('Save'); ?></button>

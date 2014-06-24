@@ -23,3 +23,13 @@ function current_user_api_key() {
         return $ci->session->userdata('user')->api_key;
     }
 }
+
+/**
+ * @return int
+ */
+function current_user_id() {
+    $ci = & get_instance();
+    $ci->load->model('users_model');
+    $userId = $ci->session->userdata('user')->id;
+    return $userId;
+}

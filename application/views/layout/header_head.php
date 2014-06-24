@@ -8,14 +8,15 @@
 
         <meta name="description" content="Life and Home Controlling System">
         <meta name="author" content="Bernd Bestel (http://berrnd.de)">
-        <link rel="shortcut icon" href="<?php echo img_url('lihocos.ico'); ?>">
+        <link rel="shortcut icon" href="<?php echo img_url('lihocos_48x48.png'); ?>">
 
         <title><?php echo $title; ?> | LiHoCoS</title>
 
         <!-- Core CSS -->
         <?php echo css('bootstrap.min'); ?>
         <?php echo third_party_css('font-awesome/css/font-awesome.min'); ?>
-        <?php echo css('//fonts.googleapis.com/css?family=Open+Sans|Roboto'); ?>
+        <?php echo third_party_css('google-font-open-sans/open-sans'); ?>
+        <?php echo third_party_css('google-font-roboto/roboto'); ?>
         <?php echo css('lihocos'); ?>
         <?php echo css('sb-admin'); ?>
 
@@ -52,5 +53,7 @@
         <?php if (!lang('jTable_lang') === 'en') : ?>
             <?php echo third_party_js('jtable/localization/jquery.jtable.' . lang('jTable_lang')); ?>
         <?php endif; ?>
+
+        <?php $this->load->view('js/lihocos-js-header'); ?>
 
     </head>

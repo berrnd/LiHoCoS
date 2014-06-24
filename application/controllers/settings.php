@@ -143,7 +143,7 @@ class Settings extends SessionController {
         }
     }
 
-    public function get_macro_action_edit_form($macroActionId) {
+    public function render_macro_action_edit_form($macroActionId) {
         $macroAction = $this->macro_actions_model->get($macroActionId);
         $macro = $this->macros_model->get($macroAction->macro_id);
         $lights = $this->lights_model->get();

@@ -50,7 +50,7 @@ class Home extends SessionController {
     public function sensor_history() {
         $data = array(
             'pageId' => 'home-sensors-history',
-            'title' => lang('Home')
+            'title' => lang('Sensor History')
         );
 
         $this->load->view('home_sensors_history', $data);

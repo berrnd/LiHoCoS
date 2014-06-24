@@ -2,13 +2,13 @@
     <div class="panel-heading">
         <span class="panel-title"><?php echo lang('Location History'); ?></span>
         <div class="pull-right">
-            <button style="margin-right: 5px;" type="button" class="btn btn-default btn-xs" onclick="window.lhmap.moveDateRange(true);"><i class="fa fa-backward fa-lg"></i></button>
+            <button style="margin-right: 5px;" type="button" class="btn btn-default btn-xs" onclick="window.lhmap.moveDateRange(true);"><i class="fa fa-backward"></i></button>
             <span id="date-range-location-history-map">
                 <i class="fa fa-calendar fa-lg"></i>
                 <span></span> <i class="caret"></i>
             </span>
-            <button style="margin-left: 5px;" type="button" class="btn btn-default btn-xs" onclick="window.lhmap.moveDateRange(false);"><i class="fa fa-forward fa-lg"></i></button>
-            <button style="margin-left: 10px;" type="button" class="btn btn-default btn-xs" onclick="window.lhmap.reload();"><i class="fa fa-refresh fa-lg"></i></button>
+            <button style="margin-left: 5px;" type="button" class="btn btn-default btn-xs" onclick="window.lhmap.moveDateRange(false);"><i class="fa fa-forward"></i></button>
+            <button style="margin-left: 10px;" type="button" class="btn btn-default btn-xs" onclick="window.lhmap.reload();"><i class="fa fa-refresh"></i></button>
         </div>
     </div>
     <div class="panel-body">
@@ -17,8 +17,6 @@
 </div>
 
 <script>
-
-    var MYSQL_DATETIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
     window.lhmap = {};
     window.lhmap.daterange_start = moment().subtract('days', 1).startOf('day').format(MYSQL_DATETIME_FORMAT);
@@ -119,12 +117,12 @@
     $(document).ready(function() {
         window.lhmap.map = L.map('location-history-map');
 
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors',
             maxZoom: 18
         }).addTo(window.lhmap.map);
 
-        var homeLocation = new L.LatLng(<?php echo get_setting(KnownSettings::LATITUDE); ?>, <?php echo get_setting(KnownSettings::LONGITUDE); ?>);
+        var homeLocation = new L.LatLng(<?php echo get_setting(KnownSettings::HOME_LATITUDE); ?>, <?php echo get_setting(KnownSettings::HOME_LONGITUDE); ?>);
         window.lhmap.map.setView(homeLocation, 12);
 
         window.lhmap.displayDateRange();

@@ -48,7 +48,6 @@
                         <div class="form-group">
                             <label><?php echo lang('Blinds'); ?></label>
                             <div class="input-group">
-
                                 <select name="<?php echo KnownSettings::PLUGIN_BLINDS; ?>" data-selected="<?php echo get_setting(KnownSettings::PLUGIN_BLINDS); ?>" class="form-control plugin-select">
                                     <?php foreach ($plugins as $plugin) : ?>
                                         <?php if ($plugin->pluginArea === PluginAreas::BLINDS) : ?>
@@ -124,11 +123,11 @@
                     </div>
                     <div class="tab-pane fade" id="users">
                         <h4><?php echo lang('Users'); ?></h4>
-                        <p><div id="grid-users"></div></p>
+                        <p><div id="grid-users" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="advanced-settings">
                         <h4><?php echo lang('Advanced'); ?></h4>
-                        <p><div id="grid-advanced_settings"></div></p>
+                        <p><div id="grid-advanced_settings" class="grid"></div></p>
                     </div>
                 </div>
             </div>
@@ -152,39 +151,39 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="rooms">
                         <h4><?php echo lang('Rooms'); ?></h4>
-                        <p><div id="grid-rooms"></div></p>
+                        <p><div id="grid-rooms" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="blinds">
                         <h4><?php echo lang('Blinds'); ?></h4>
-                        <p><div id="grid-blinds"></div></p>
+                        <p><div id="grid-blinds" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="cameras">
                         <h4><?php echo lang('Cameras'); ?></h4>
-                        <p><div id="grid-cameras"></div></p>
+                        <p><div id="grid-cameras" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="computers">
                         <h4><?php echo lang('Computers'); ?></h4>
-                        <p><div id="grid-computers"></div></p>
+                        <p><div id="grid-computers" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="doors">
                         <h4><?php echo lang('Doors'); ?></h4>
-                        <p><div id="grid-doors"></div></p>
+                        <p><div id="grid-doors" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="lights">
                         <h4><?php echo lang('Lights'); ?></h4>
-                        <p><div id="grid-lights"></div></p>
+                        <p><div id="grid-lights" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="sensors">
                         <h4><?php echo lang('Sensors'); ?></h4>
-                        <p><div id="grid-sensors"></div></p>
+                        <p><div id="grid-sensors" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="windows">
                         <h4><?php echo lang('Windows'); ?></h4>
-                        <p><div id="grid-windows"></div></p>
+                        <p><div id="grid-windows" class="grid"></div></p>
                     </div>
                     <div class="tab-pane fade" id="macros">
                         <h4><?php echo lang('Macros'); ?></h4>
-                        <p><div id="grid-macros"></div></p>
+                        <p><div id="grid-macros" class="grid"></div></p>
                     </div>
                 </div>
             </div>
@@ -605,7 +604,7 @@
                                             var $img = $('<i class="glyphicon glyphicon-edit"></i>');
                                                                 $img.click(function() {
                                                 $.ajax({
-                                                    url: '<?php echo base_url('settings/get_macro_action_edit_form'); ?>' + '/' + parentRow.record.id,
+                                                    url: '<?php echo base_url('settings/render_macro_action_edit_form'); ?>' + '/' + parentRow.record.id,
                                                     success: function(response) {
                                                         $('#modal-template-content').html(response);
                                                         $('#modal-template').modal('show');
@@ -629,9 +628,10 @@
             defaultSorting: 'name ASC'
         });
 
-        $('[id^=grid-]').each(function() {
-            var element = $(this);
-            element.jtable('load');
+        $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function(e) {
+            var activatedTab = $($(e.target).attr('href'));
+            var grid = activatedTab.find('.grid').first();
+            grid.jtable('load');
         })
 
     });

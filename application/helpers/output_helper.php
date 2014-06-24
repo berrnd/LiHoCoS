@@ -12,3 +12,7 @@ function unauthorized_and_exit() {
     header('HTTP/1.1 401 Unauthorized');
     exit();
 }
+
+function http_404() {
+    header('HTTP/1.1 404 Not Found');
+}

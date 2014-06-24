@@ -6,7 +6,7 @@
  * @return int
  */
 function sunrise($timestamp) {
-    return date_sunrise($timestamp, SUNFUNCS_RET_TIMESTAMP, get_setting(KnownSettings::LATITUDE), get_setting(KnownSettings::LONGITUDE), 90, date('Z') / 60 / 60);
+    return date_sunrise($timestamp, SUNFUNCS_RET_TIMESTAMP, get_setting(KnownSettings::HOME_LATITUDE), get_setting(KnownSettings::HOME_LONGITUDE), 90, date('Z') / 60 / 60);
 }
 
 /**
@@ -15,5 +15,5 @@ function sunrise($timestamp) {
  * @return int
  */
 function sunset($timestamp) {
-    return date_sunset($timestamp, SUNFUNCS_RET_TIMESTAMP, get_setting(KnownSettings::LATITUDE), get_setting(KnownSettings::LONGITUDE), 90, date('Z') / 60 / 60);
+    return date_sunset($timestamp, SUNFUNCS_RET_TIMESTAMP, get_setting(KnownSettings::HOME_LATITUDE), get_setting(KnownSettings::HOME_LONGITUDE), 90, date('Z') / 60 / 60);
 }

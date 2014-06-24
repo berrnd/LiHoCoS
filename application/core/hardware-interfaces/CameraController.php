@@ -22,7 +22,7 @@ class CameraController extends HardwareController {
         curl_close($ch);
 
         if (empty($result))
-            $result = file_get_contents(APPPATH . '/views/img/camera_error.png');
+            return FALSE;
 
         return $result;
     }

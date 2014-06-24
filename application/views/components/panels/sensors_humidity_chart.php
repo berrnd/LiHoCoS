@@ -3,20 +3,20 @@
         <span class="panel-title"><?php echo lang('Sensor humidity history'); ?></span>
         <div class="pull-right">
             <label for="aggregation-level-humidity-chart"><?php echo lang('Aggregation level'); ?></label>
-            <select data-selected="30" id="aggregation-level-humidity-chart" onChange="window.humchart.aggregation_level = this.options[this.selectedIndex].value;">
+            <select style="margin-right: 10px;" data-selected="30" id="aggregation-level-humidity-chart" onChange="window.humchart.aggregation_level = this.options[this.selectedIndex].value;">
                 <option value="30"><?php echo lang('Half hourly'); ?></option>
                 <option value="60"><?php echo lang('Hourly'); ?></option>
                 <option value="1440"><?php echo lang('Daily'); ?></option>
                 <option value="10080"><?php echo lang('Weekly'); ?></option>
                 <option value="40320"><?php echo lang('Monthly'); ?></option>
             </select>
-            &nbsp;&nbsp;&nbsp;
+            <button style="margin-right: 5px;" type="button" class="btn btn-default btn-xs" onclick="window.humchart.moveDateRange(true);"><i class="fa fa-backward"></i></button>
             <span id="date-range-humidity-chart">
-                <i class="fa fa-calendar fa-lg"></i>
+                <i class="fa fa-calendar"></i>
                 <span></span> <i class="caret"></i>
             </span>
-            &nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-default btn-xs" onclick="window.humchart.reload();"><i class="fa fa-refresh fa-lg"></i></button>
+            <button style="margin-left: 5px;" type="button" class="btn btn-default btn-xs" onclick="window.humchart.moveDateRange(false);"><i class="fa fa-forward"></i></button>
+            <button style="margin-left: 10px;" type="button" class="btn btn-default btn-xs" onclick="window.humchart.reload();"><i class="fa fa-refresh"></i></button>
         </div>
 
     </div>
@@ -26,8 +26,6 @@
 </div>
 
 <script>
-
-    var MYSQL_DATETIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
     window.humchart = {};
     window.humchart.daterange_start = moment().startOf('day').format(MYSQL_DATETIME_FORMAT);
@@ -123,6 +121,26 @@
 
     window.humchart.displayDateRange = function() {
         $('#date-range-humidity-chart span').html(moment(window.humchart.daterange_start).format('<?php echo lang('js_short_date_format'); ?>') + ' - ' + moment(window.humchart.daterange_end).format('<?php echo lang('js_short_date_format'); ?>'));
+    }
+
+    window.humchart.moveDateRange = function(backwards) {
+        var start = moment(window.humchart.daterange_start);
+        var end = moment(window.humchart.daterange_end);
+        var days = end.diff(start, 'days');
+
+        if (days == 0)
+            days = 1;
+
+        if (backwards)
+            days = days * -1;
+
+        start.add('days', days);
+        end.add('days', days);
+        window.humchart.daterange_start = start.format(MYSQL_DATETIME_FORMAT);
+        window.humchart.daterange_end = end.format(MYSQL_DATETIME_FORMAT);
+
+        window.humchart.displayDateRange();
+        window.humchart.reload();
     }
 
     $(document).ready(function() {
