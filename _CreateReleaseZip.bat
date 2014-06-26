@@ -11,6 +11,6 @@ del "%myTemp%\_*.bat"
 
 set releasePath=%projectPath%\_release
 mkdir "%releasePath%"
-"%zip%" a -tzip -r "%releasePath%\LiHoCoS_%version%.zip" "%myTemp%\*.*"
+"%zip%" a -tzip -r "%releasePath%\LiHoCoS_v%version%.zip" "%myTemp%\*.*"
 
 rd /S /Q "%myTemp%"
