@@ -3,7 +3,7 @@
 
 <div id="page-content">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-md-5">
             <?php $this->load->view('components/panels/macros'); ?>
         </div>
     </div>

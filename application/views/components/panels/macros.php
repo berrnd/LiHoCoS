@@ -4,6 +4,7 @@
     </div>
     <div class="panel-body">
         <?php foreach ($macros as $macro) : ?>
+            <p>
             <div class="btn-group">
                 <?php $macroUrl = api_url('api/macros/execute/' . $macro->id); ?>
                 <button data-success-message="<?php echo lang('Successfully executed macro'); ?>" data-error-message="<?php echo lang('Macro execution failed'); ?>" data-url="<?php echo $macroUrl; ?>" type="button" class="btn btn-default action-button"><?php echo $macro->name; ?></button>
@@ -13,6 +14,7 @@
                     <input type="text" class="form-control" readonly="true" value="<?php echo $macroUrl; ?>">
                 </ul>
             </div>
+            </p>
         <?php endforeach; ?>
     </div>
 </div>

@@ -10,8 +10,8 @@
                         <?php echo $camera->name; ?>
                         <small><code class="camera-timestamp"><?php echo format_datetime_user_defined(mysql_now()); ?></code></small>
 
-                        <button onclick="camera_play('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-play"></i></button>
-                        <button onclick="camera_stop('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i></button>
+                        <button id="camera-play-button-<?php echo $camera->id; ?>" onclick="camera_play('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-play"></i></button>
+                        <button id="camera-stop-button-<?php echo $camera->id; ?>" onclick="camera_stop('camera-img-<?php echo $camera->id; ?>')" type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i></button>
                     </h4>
 
                     <img id="camera-img-<?php echo $camera->id; ?>" data-camera-id="<?php echo $camera->id; ?>" width="100%" height="100%" class="img-responsive img-rounded auto-reload" data-src-base64="<?php echo base_url('api/cameras/snapshot/' . $camera->id); ?>?base64=true" />
@@ -48,10 +48,13 @@
                 var serverTime = request.getResponseHeader('X-Server-Time')
                 img.attr('src', 'data:image/jpg;base64,' + data);
                 img.prev().children('small').children('.camera-timestamp').text(serverTime);
+                $('#camera-unavailable-' + cameraId).hide();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 img.remove();
                 $('#camera-unavailable-' + cameraId).show();
+                $('#camera-play-button-' + cameraId).addClass('disabled');
+                $('#camera-stop-button-' + cameraId).addClass('disabled');
             }
         });
     }
