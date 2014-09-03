@@ -1,5 +1,5 @@
 set projectPath=%~dp0
-set prodWwwRoot=\\BestelServer\inetpub\wwwroot\LiHoCoS
+set prodWwwRoot=\\BestelServer\inetpub\lihocos.berrnd.de
 
 
 if %projectPath:~-1%==\ set projectPath=%projectPath:~0,-1%
