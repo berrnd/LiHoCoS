@@ -134,6 +134,10 @@ $lang['Ready'] = 'Ready';
 $lang['If you have a big file, this could take long - just wait until "Ready" shows up.'] = 'If you have a big file, this could take long - just wait until "Ready" shows up.';
 $lang['If checked, you get a SQL statement with which you can import the location points directly into the database.'] = 'If checked, you get a SQL statement with which you can import the location points directly into the database.';
 $lang['Import as SQL'] = 'Import as SQL';
+$lang['Location Type'] = 'Location Type';
+$lang['Sensors Gauge'] = 'Sensors Gauge';
+$lang['Inside'] = 'Inside';
+$lang['Outside'] = 'Outside';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';

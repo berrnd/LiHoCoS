@@ -498,6 +498,13 @@
                                         echo "'$sensorType',";
                                     ?>]
                 },
+                location_type: {
+                    title: '<?php echo lang('Location Type'); ?>',
+                    options: [<?php
+                                    foreach (get_class_constants('sensors_model') as $sensorType)
+                                        echo "'$sensorType',";
+                                    ?>]
+                },
                 room_id: {
                     title: '<?php echo lang('Room'); ?>',
                     options: '<?php echo base_url('settings/ajax_jtable/rooms/list-dropdown/name'); ?>'

@@ -5,3 +5,11 @@ body {
 .navbar-brand {
     font-family: 'Roboto';
 }
+
+.text-little-bit-bigger {
+    font-size: 115%;
+}
+
+.text-bold {
+    font-weight: bold;
+}

@@ -8,6 +8,7 @@ UPDATE settings SET name = 'home_latitude' WHERE name = 'latitude';
 UPDATE settings SET name = 'home_longitude' WHERE name = 'longitude';
 ALTER TABLE macros DROP INDEX name, ADD UNIQUE IX_macros (name);
 ALTER TABLE macro_actions ADD INDEX IX_macro_actions (macro_id);
+ALTER TABLE sensors ADD location_type VARCHAR(10) DEFAULT 'INSIDE' AFTER type;
 ```
 
 ### Version 0.1.5

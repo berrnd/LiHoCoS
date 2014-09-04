@@ -5,6 +5,9 @@ class Sensors_model extends Device {
     const SENSOR_TYPE_THERMO_ONLY = 'THERMOONLY';
     const SENSOR_TYPE_HYGRO_ONLY = 'HYGROONLY';
     const SENSOR_TYPE_THERMOHYGRO = 'THERMOHYGRO';
+    const SENSOR_LOCATION_TYPE_INSIDE = 'INSIDE';
+    const SENSOR_LOCATION_TYPE_OUTSIDE = 'OUTSIDE';
+    const SENSOR_LOCATION_TYPE_UNDEFINED = 'UNDEFINED';
 
     public function __construct() {
         parent::__construct();
@@ -13,6 +16,7 @@ class Sensors_model extends Device {
 
         //Default values
         $this->type = self::SENSOR_TYPE_THERMOHYGRO;
+        $this->location_type = self::SENSOR_LOCATION_TYPE_UNDEFINED;
         $this->temperature = -1;
         $this->relative_humidity = -1;
         $this->last_change = mysql_now();
@@ -22,6 +26,11 @@ class Sensors_model extends Device {
      * @var string
      */
     public $type;
+
+    /**
+     * @var string
+     */
+    public $location_type;
 
     /**
      * @var int
