@@ -146,4 +146,5 @@ $lang['js_short_date_format'] = 'YYYY-MM-DD';
 $lang['js_long_date_format'] = 'YYYY-MM-DD HH:mm:ss';
 $lang['php_short_date_format'] = 'Y-m-d';
 $lang['php_long_date_format'] = 'Y-m-d H:i:s';
-$lang['d3js_long_date_format'] = '%y-%m-%d. %H:%M';
+$lang['c3js_short_date_format'] = '%Y-%m-%d';
+$lang['c3js_long_date_format'] = '%Y-%m-%d %H:%M:%S';

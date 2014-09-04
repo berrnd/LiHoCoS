@@ -21,7 +21,7 @@
 
     </div>
     <div class="panel-body">
-        <svg id="sensors-humidity-line-chart" style="height: 600px;" />
+        <div id="sensors-humidity-line-chart"></div>
     </div>
 </div>
 
@@ -32,44 +32,66 @@
     window.humchart.daterange_end = moment().format(MYSQL_DATETIME_FORMAT);
     window.humchart.aggregation_level = 30;
 
-    window.humchart.reload = function reload_chart() {
-        nv.addGraph(function() {
-            var chart = nv.models.lineChart()
-                    .xScale(d3.time.scale());
-
-            chart.xAxis
-                    .axisLabel('<?php echo lang('Time') ?>')
-                    .tickFormat(function(d) {
-                        return d3.time.format('<?php echo lang('d3js_long_date_format'); ?>')(new Date(d))
-                    });
-
-            chart.yAxis
-                    .axisLabel('<?php echo lang('Humidity') ?>');
-
-            d3.select("#sensors-humidity-line-chart")
-                    .datum(window.humchart.getData())
-                    .transition()
-                    .call(chart);
-
-            nv.utils.windowResize(
-                    function() {
-                        chart.update();
+    window.humchart.reload = function() {
+        window.humchart.chart = c3.generate({
+            bindto: '#sensors-humidity-line-chart',
+            data: {
+                x: 'x',
+                xFormat: '%Y-%m-%d %H:%M:%S',
+                columns: window.humchart.getData(),
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '<?php echo lang('c3js_long_date_format'); ?>',
+                        count: 100,
+                        rotate: 75
+                    },
+                    height: 110
+                },
+                y: {
+                    label: {
+                        text: '<?php echo lang('Humidity') ?>',
+                        position: 'outer-middle'
                     }
-            );
-
-            return chart;
+                }
+            },
+            legend: {
+                position: 'bottom'
+            },
+            zoom: {
+                enabled: true
+            },
+            zoom: {
+                enabled: true
+            },
+            size: {
+                height: 600
+            },
+            grid: {
+                x: {
+                    show: false
+                },
+                y: {
+                    show: true
+                }
+            }
         });
     };
 
     window.humchart.getData = function() {
-        var lines = [];
+        var sensors = [];
+        var x = [];
+        x.push('x');
         $.ajax({
             url: '<?php echo base_url('api/common/get_data/sensors') ?>',
             dataType: 'json',
             async: false,
             success: function(sensorsResponse) {
                 $.each(sensorsResponse.data, function(i) {
-                    var line = {key: sensorsResponse.data[i].name, values: []};
+                    var sensor = [];
+                    sensor.push(sensorsResponse.data[i].name);
                     var query = "SELECT sensor_id, timestamp, TRUNCATE(AVG(relative_humidity), 1) as relative_humidity FROM sensors_history WHERE sensor_id = " + sensorsResponse.data[i].id + " AND timestamp BETWEEN '" + window.humchart.daterange_start + "' AND '" + window.humchart.daterange_end + "' GROUP BY sensor_id, (60 / " + window.humchart.aggregation_level + ") * HOUR(timestamp) %2B FLOOR(MINUTE(timestamp) / " + window.humchart.aggregation_level + ") ORDER BY timestamp";
                     $.ajax({
                         url: '<?php echo base_url('api/common/get_data/sensors_history') ?>',
@@ -79,18 +101,17 @@
                         async: false,
                         success: function(sensorsHistoryResponse) {
                             $.each(sensorsHistoryResponse.data, function(ii) {
-                                line.values.push({
-                                    x: Date.parse(sensorsHistoryResponse.data[ii].timestamp),
-                                    y: parseFloat(sensorsHistoryResponse.data[ii].relative_humidity)
-                                });
+                                sensor.push(parseFloat(sensorsHistoryResponse.data[ii].relative_humidity));
+                                x.push(sensorsHistoryResponse.data[ii].timestamp);
                             });
                         }
                     });
-                    lines.push(line);
+                    sensors.push(sensor);
                 });
             }
         });
-        return lines;
+        sensors.push(x);
+        return sensors;
     }
 
     $('#date-range-humidity-chart').daterangepicker({
