@@ -144,6 +144,13 @@ $lang['Import these days now manually'] = 'Import these days now manually';
 $lang['This mail was sent by LiHoCoS'] = 'This mail was sent by LiHoCoS';
 $lang['Import Location History from CSV'] = 'Import Location History from CSV';
 $lang['A CSV line should look like this'] = 'A CSV line should look like this';
+$lang['Mail'] = 'Mail';
+$lang['SMTP Host'] = 'SMTP Host';
+$lang['SMTP Port'] = 'SMTP Port';
+$lang['SMTP Crypto'] = 'SMTP Crypto';
+$lang['SMTP Username'] = 'SMTP Username';
+$lang['SMTP Password'] = 'SMTP Password';
+$lang['SMTP From Address'] = 'SMTP From Address';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';

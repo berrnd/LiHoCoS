@@ -19,6 +19,7 @@
                     <li class="active"><a href="#common" data-toggle="tab"><?php echo lang('Common'); ?></a></li>
                     <li><a href="#plugins" data-toggle="tab"><?php echo lang('Plugins'); ?></a></li>
                     <li><a href="#users" data-toggle="tab"><?php echo lang('Users'); ?></a></li>
+                    <li><a href="#mail" data-toggle="tab"><?php echo lang('Mail'); ?></a></li>
                     <li><a href="#advanced-settings" data-toggle="tab"><?php echo lang('Advanced'); ?></a></li>
                 </ul>
 
@@ -124,6 +125,36 @@
                     <div class="tab-pane fade" id="users">
                         <h4><?php echo lang('Users'); ?></h4>
                         <p><div id="grid-users" class="grid"></div></p>
+                    </div>
+                    <div class="tab-pane fade" id="mail">
+                        <h4><?php echo lang('Mail'); ?></h4>
+                        <div class="form-group">
+                            <label><?php echo lang('SMTP Host'); ?></label>
+                            <input name="<?php echo KnownSettings::SMTP_HOST; ?>" class="form-control" value="<?php echo get_setting(KnownSettings::SMTP_HOST); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo lang('SMTP Port'); ?></label>
+                            <input type="number" name="<?php echo KnownSettings::SMTP_PORT; ?>" class="form-control" value="<?php echo get_setting(KnownSettings::SMTP_PORT); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo lang('SMTP Crypto'); ?></label>
+                            <select name="<?php echo KnownSettings::SMTP_CRYPTO; ?>" data-selected="<?php echo get_setting(KnownSettings::SMTP_CRYPTO); ?>" class="form-control">
+                                <option value="tls">tls</option>
+                                <option value="ssl">ssl</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo lang('SMTP Username'); ?></label>
+                            <input name="<?php echo KnownSettings::SMTP_USERNAME; ?>" class="form-control" value="<?php echo get_setting(KnownSettings::SMTP_USERNAME); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo lang('SMTP Password'); ?></label>
+                            <input type="password" name="<?php echo KnownSettings::SMTP_PASSWORD; ?>" class="form-control" value="<?php echo get_setting(KnownSettings::SMTP_PASSWORD); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo lang('SMTP From Address'); ?></label>
+                            <input type="email" name="<?php echo KnownSettings::SMTP_FROM; ?>" class="form-control" value="<?php echo get_setting(KnownSettings::SMTP_FROM); ?>">
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="advanced-settings">
                         <h4><?php echo lang('Advanced'); ?></h4>
