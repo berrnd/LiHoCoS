@@ -9,6 +9,20 @@ UPDATE settings SET name = 'home_longitude' WHERE name = 'longitude';
 ALTER TABLE macros DROP INDEX name, ADD UNIQUE IX_macros (name);
 ALTER TABLE macro_actions ADD INDEX IX_macro_actions (macro_id);
 ALTER TABLE sensors ADD location_type VARCHAR(10) DEFAULT 'INSIDE' AFTER type;
+CREATE TABLE calendar_internal (date DATE COLLATE latin1_german1_ci NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+ALTER TABLE calendar_internal ADD INDEX IX_calendar_internal (date);
+CREATE VIEW calendar AS SELECT date, YEAR(date) AS year, MONTH(date) AS month, DAY(date) AS day FROM calendar_internal;
+DELIMITER ;;
+CREATE PROCEDURE populate_calendar(dateStart DATE, dateEnd DATE)
+BEGIN
+    WHILE dateStart <= dateEnd DO
+        INSERT INTO calendar_internal (date) VALUES (dateStart);
+        SET dateStart = DATE_ADD(dateStart, INTERVAL 1 DAY);
+    END WHILE;
+END;;
+DELIMITER ;
+CALL populate_calendar('2000-01-01', '2099-12-31');
+CREATE VIEW location_history_missing_days AS SELECT c.date FROM calendar c LEFT JOIN location_history lh ON c.date = DATE(lh.timestamp) WHERE lh.id IS NULL AND c.date < CURRENT_DATE() AND c.date > DATE_ADD(CURRENT_DATE(), INTERVAL -6 MONTH);
 ```
 
 ### Version 0.1.5

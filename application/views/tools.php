@@ -6,6 +6,9 @@
         <div class="col-lg-6">
             <?php $this->load->view('components/panels/location_history_google_takeout_importer'); ?>
         </div>
+        <div class="col-lg-6">
+            <?php $this->load->view('components/panels/location_history_csv_importer'); ?>
+        </div>
     </div>
 </div>
 

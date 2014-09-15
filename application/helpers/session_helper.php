@@ -33,3 +33,13 @@ function current_user_id() {
     $userId = $ci->session->userdata('user')->id;
     return $userId;
 }
+
+/**
+ * @return string
+ */
+function current_user_mail_address() {
+    $ci = & get_instance();
+    $ci->load->model('users_model');
+    $userId = $ci->session->userdata('user')->email;
+    return $userId;
+}

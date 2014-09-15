@@ -3,14 +3,14 @@
         <span class="panel-title"><?php echo lang('Import Location History from Google Takeout'); ?></span>
     </div>
     <div class="panel-body">
-        <form id="import-form" role="form">
+        <form id="import-form-gt" role="form">
             <div class="form-group">
-                <label for="exampleInputEmail1"><?php echo lang('Max. Date'); ?></label>
+                <label for="import-max-date"><?php echo lang('Max. Date'); ?></label>
                 <p class="help-block"><?php echo lang('Location points will be imported including this date'); ?></p>
                 <input id="import-max-date" type="date" class="form-control">
             </div>
             <div class="form-group">
-                <input type="file" id="file" name="file[]" />
+                <input type="file" id="file-gt" name="file-gt[]" />
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -26,23 +26,23 @@
                 <p class="help-block"><?php echo lang('If you have a big file, this could take long - just wait until "Ready" shows up.'); ?></p>
             </div>
         </form>
-        <code id="import-status"></code>
-        <div id="import-ready-info" class="bs-callout bs-callout-info"><?php echo lang('Ready'); ?></div>
+        <code id="import-status-gt"></code>
+        <div id="import-ready-info-gt" class="bs-callout bs-callout-info"><?php echo lang('Ready'); ?></div>
         <textarea id="import-sql-output" class="form-control" rows="10"></textarea>
     </div>
 </div>
 
 <script>
 
-    $("#import-form").submit(function(event) {
+    $("#import-form-gt").submit(function(event) {
         event.preventDefault();
 
         var of = '<?php echo lang('of'); ?>';
         var imported = '<?php echo lang('imported'); ?>';
         var importAsSql = $('#import-as-sql').is(':checked');
-        $('#import-status').show();
+        $('#import-status-gt').show();
 
-        var files = document.getElementById('file').files;
+        var files = document.getElementById('file-gt').files;
         var file = files[0];
         var fileReader = new FileReader();
 
@@ -77,7 +77,7 @@
                                 data: {'timestamp': timestamp.format(MYSQL_DATETIME_FORMAT), 'latitude': latitude, 'longitude': longitude, 'accuracy': accuracy},
                                 async: false,
                                 success: function(response) {
-                                    $('#import-status').text(importedCount++ + ' ' + of + ' ' + locationCount + ' ' + imported);
+                                    $('#import-status-gt').text(importedCount++ + ' ' + of + ' ' + locationCount + ' ' + imported);
                                 }
                             });
                         }
@@ -86,11 +86,11 @@
 
                 if (importAsSql) {
                     $('#import-sql-output').val(sql);
-                    $('#import-status').hide();
+                    $('#import-status-gt').hide();
                     $('#import-sql-output').show();
                 }
 
-                $('#import-ready-info').show();
+                $('#import-ready-info-gt').show();
             };
         })(file);
 
@@ -98,8 +98,8 @@
     });
 
     $(document).ready(function() {
-        $('#import-status').hide();
-        $('#import-ready-info').hide();
+        $('#import-status-gt').hide();
+        $('#import-ready-info-gt').hide();
         $('#import-sql-output').hide();
         $('#import-max-date').val(new Date().toJSON().slice(0, 10));
     });

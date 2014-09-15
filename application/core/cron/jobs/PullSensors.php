@@ -5,7 +5,7 @@ class PullSensors extends CronJob {
     public function __construct() {
         parent::__construct();
 
-        $this->interval_minutes = 5;
+        $this->interval_cron = '0,5,10,15,20,25,30,35,40,45,50,55 * * * *';
     }
 
     public function execute() {

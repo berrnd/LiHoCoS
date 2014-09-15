@@ -15,9 +15,9 @@ class CronJob {
     protected $ci;
 
     /**
-     * @var int
+     * @var string
      */
-    protected $interval_minutes;
+    protected $interval_cron;
 
     /**
      * @var DateTime
@@ -32,13 +32,16 @@ class CronJob {
         $settingKey = $this->settingKey . 'last_execution_time';
         $lastExecutionTime = get_internal_setting($settingKey);
 
+        $forceExecution = FALSE;
         if (empty($lastExecutionTime))
-            $lastExecutionTime = now();
+            $forceExecution = TRUE;
+        else
+            $lastExecutionTime = strtotime($lastExecutionTime);
 
-        $nextExecutionTime = date_create($lastExecutionTime);
-        date_add($nextExecutionTime, date_interval_create_from_date_string("$this->interval_minutes minutes"));
+        $cron = Cron\CronExpression::factory($this->interval_cron);
+        $nextExecutionTime = date_timestamp_get($cron->getPreviousRunDate());
 
-        if (date_timestamp_get($nextExecutionTime) <= now()) {
+        if ($forceExecution === TRUE || ($nextExecutionTime <= now() && $nextExecutionTime > $lastExecutionTime)) {
             $this->execute();
             set_internal_setting($settingKey, mysql_now());
         }

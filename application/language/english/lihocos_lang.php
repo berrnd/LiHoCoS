@@ -138,6 +138,12 @@ $lang['Location Type'] = 'Location Type';
 $lang['Sensors Gauge'] = 'Sensors Gauge';
 $lang['Inside'] = 'Inside';
 $lang['Outside'] = 'Outside';
+$lang['LiHoCoS Location History: Missing days found'] = 'LiHoCoS Location History: Missing days found';
+$lang['For the following days, no location history was recorded'] = 'For the following days, no location history was recorded';
+$lang['Import these days now manually'] = 'Import these days now manually';
+$lang['This mail was sent by LiHoCoS'] = 'This mail was sent by LiHoCoS';
+$lang['Import Location History from CSV'] = 'Import Location History from CSV';
+$lang['A CSV line should look like this'] = 'A CSV line should look like this';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
