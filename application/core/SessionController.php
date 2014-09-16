@@ -9,7 +9,7 @@ class SessionController extends MainController {
     }
 
     private function check_session() {
-        if (!$this->session->userdata('user'))
+        if ($this->session->userdata('user_authenticated') === FALSE)
             redirect(base_url('auth/login?from=' . current_url()));
     }
 

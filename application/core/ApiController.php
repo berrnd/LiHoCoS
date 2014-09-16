@@ -9,7 +9,7 @@ class ApiController extends MainController {
     }
 
     private function check_session() {
-        if (!$this->session->userdata('user')) { //Otherwise we already have a logged in user
+        if ($this->session->userdata('user_authenticated') === FALSE) { //Otherwise we already have a logged in user
             $this->load->model('users_model');
             $this->load->helper('output');
 
@@ -20,7 +20,7 @@ class ApiController extends MainController {
                 if ($user === FALSE)
                     unauthorized_and_exit();
                 else
-                    $this->session->set_userdata('user', $user);
+                    $this->setup_session($user);
             } else
                 unauthorized_and_exit();
         }

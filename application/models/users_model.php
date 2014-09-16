@@ -56,7 +56,7 @@ class Users_model extends GenericModel {
                 get($this->table);
 
         if ($query->num_rows() === 1)
-            return $query->row();
+            return $this->recast(get_class($this), $query->row());
         else
             return FALSE;
     }

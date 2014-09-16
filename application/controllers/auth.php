@@ -43,7 +43,7 @@ class Auth extends MainController {
         $user = $this->users_model->get_by_username_or_email($usernameOrEmail);
 
         if ($user && $passwordHash === $user->password) {
-            $this->session->set_userdata('user', $user);
+            $this->setup_session($user);
             return true;
         } else
             return false;

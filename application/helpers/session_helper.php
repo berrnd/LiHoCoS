@@ -5,11 +5,7 @@
  */
 function current_user_display_name() {
     $ci = & get_instance();
-    $ci->load->model('users_model');
-    $userId = $ci->session->userdata('user')->id;
-    $user = new Users_model();
-    $user = $user->get($userId);
-    return $user->get_display_name();
+    return $ci->session->userdata('user_display_name');
 }
 
 /**
@@ -20,7 +16,7 @@ function current_user_api_key() {
         return $_GET['api-key'];
     else {
         $ci = & get_instance();
-        return $ci->session->userdata('user')->api_key;
+        return $ci->session->userdata('user_api_key');
     }
 }
 
@@ -29,9 +25,7 @@ function current_user_api_key() {
  */
 function current_user_id() {
     $ci = & get_instance();
-    $ci->load->model('users_model');
-    $userId = $ci->session->userdata('user')->id;
-    return $userId;
+    return $ci->session->userdata('user_id');
 }
 
 /**
@@ -39,7 +33,5 @@ function current_user_id() {
  */
 function current_user_mail_address() {
     $ci = & get_instance();
-    $ci->load->model('users_model');
-    $userId = $ci->session->userdata('user')->email;
-    return $userId;
+    return $ci->session->userdata('user_email');
 }
