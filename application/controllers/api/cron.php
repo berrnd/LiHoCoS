@@ -1,6 +1,6 @@
 <?php
 
-class Cron extends MainController {
+class Cron extends ApiController {
 
     public function __construct() {
         parent::__construct();
