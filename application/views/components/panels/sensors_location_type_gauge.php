@@ -16,7 +16,7 @@
 
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         var query = "SELECT location_type, AVG(temperature) AS temperature, AVG(relative_humidity) AS relative_humidity FROM sensors GROUP BY location_type";
         $.ajax({
@@ -25,11 +25,11 @@
             type: 'POST',
             data: {'custom-select': query},
             async: false,
-            success: function(sensorsResponse) {
-                $.each(sensorsResponse.data, function(i) {
+            success: function (sensorsResponse) {
+                $.each(sensorsResponse.data, function (i) {
                     var locationType = sensorsResponse.data[i].location_type;
-                    var temperature = parseFloat(sensorsResponse.data[i].temperature);
-                    var relativeHumidity = parseFloat(sensorsResponse.data[i].relative_humidity);
+                    var temperature = parseFloat(sensorsResponse.data[i].temperature).toFixed(1);
+                    var relativeHumidity = parseFloat(sensorsResponse.data[i].relative_humidity).toFixed(0);
 
                     if (locationType == 'INSIDE') {
                         $('#sensors-gauge-temperature-inside').text(temperature);
