@@ -148,12 +148,14 @@ class Settings extends SessionController {
         $macro = $this->macros_model->get($macroAction->macro_id);
         $lights = $this->lights_model->get();
         $blinds = $this->blinds_model->get();
+        $macros = $this->macros_model->get();
 
         $data = array(
             'macroAction' => $macroAction,
             'macro' => $macro,
             'lights' => $lights,
-            'blinds' => $blinds
+            'blinds' => $blinds,
+            'macros' => $macros
         );
 
         $this->load->view("components/macro-action-edit-forms/$macroAction->type.php", $data);

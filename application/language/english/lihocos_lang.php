@@ -151,10 +151,12 @@ $lang['SMTP Crypto'] = 'SMTP Crypto';
 $lang['SMTP Username'] = 'SMTP Username';
 $lang['SMTP Password'] = 'SMTP Password';
 $lang['SMTP From Address'] = 'SMTP From Address';
+$lang['Macro'] = 'Macro';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
 $lang['set_blind_position'] = 'Set blind position';
+$lang['execute_macro'] = 'Execute macro';
 
 //None UI strings
 $lang['jTable_lang'] = 'en';

@@ -30,7 +30,6 @@ class MacroExecutor {
                     $this->ci->load->model('lights_model');
                     $light = $this->ci->lights_model->get($lightId);
                     $lightController = new LightController($light);
-
                     $lightController->switch_light($onOrOff);
                     break;
 
@@ -41,8 +40,16 @@ class MacroExecutor {
                     $this->ci->load->model('blinds_model');
                     $blind = $this->ci->blinds_model->get($blindId);
                     $blindController = new BlindController($blind);
-
                     $blindController->set_position($position);
+                    break;
+
+                case MacroActionTypes::EXECUTE_MACRO:
+                    $macroId = $parameters['macro-id'];
+
+                    $this->ci->load->model('macros_model');
+                    $macro = $this->ci->macros_model->get($macroId);
+                    $macroExecutor = new MacroExecutor($macro);
+                    $macroExecutor->execute();
                     break;
             }
         }
