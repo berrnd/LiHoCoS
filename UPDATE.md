@@ -25,6 +25,7 @@ CALL populate_calendar('2000-01-01', '2099-12-31');
 CREATE VIEW location_history_existing_days AS SELECT DATE(timestamp) AS date_timestamp, MAX(ID) AS id FROM location_history GROUP BY DATE(timestamp);
 CREATE VIEW location_history_missing_days AS SELECT c.date FROM calendar c LEFT JOIN location_history_existing_days lh ON c.date = lh.date_timestamp WHERE lh.id IS NULL AND c.date < CURRENT_DATE() AND c.date > DATE_ADD(CURRENT_DATE(), INTERVAL -6 MONTH);
 TRUNCATE TABLE sessions;
+CREATE TABLE computers_traffic (id int(11) NOT NULL AUTO_INCREMENT, computer_id INT NOT NULL, date DATE NOT NULL, bytes_in BIGINT NOT NULL, bytes_out BIGINT NOT NULL, PRIMARY KEY (id), UNIQUE KEY IX_computers_traffic (computer_id, date)) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 ```
 
 ### Version 0.1.5

@@ -11,6 +11,9 @@
                     <li>
                         <a href="<?php echo base_url('home/sensor_history'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i> <?php echo lang('Sensor History'); ?></a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('home/computers_traffic'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i> <?php echo lang('Computer traffic'); ?></a>
+                    </li>
                 </ul>
             </li>
         </ul>

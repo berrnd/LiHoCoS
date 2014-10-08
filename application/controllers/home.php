@@ -46,7 +46,7 @@ class Home extends SessionController {
 
         $this->load->view('home', $data);
     }
-    
+
     public function sensor_history() {
         $data = array(
             'pageId' => 'home-sensors-history',
@@ -54,6 +54,15 @@ class Home extends SessionController {
         );
 
         $this->load->view('home_sensors_history', $data);
+    }
+
+    public function computers_traffic() {
+        $data = array(
+            'pageId' => 'home-computers-traffic',
+            'title' => lang('Computer traffic')
+        );
+
+        $this->load->view('home_computers_traffic', $data);
     }
 
 }

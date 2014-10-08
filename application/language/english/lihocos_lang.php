@@ -152,6 +152,7 @@ $lang['SMTP Username'] = 'SMTP Username';
 $lang['SMTP Password'] = 'SMTP Password';
 $lang['SMTP From Address'] = 'SMTP From Address';
 $lang['Macro'] = 'Macro';
+$lang['Computer traffic'] = 'Computer traffic';
 
 //MacroActionTypes
 $lang['switch_light'] = 'Switch light on/off';
