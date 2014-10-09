@@ -27,6 +27,10 @@ ForEach($row In $dataset.Tables[0])
 	if ($dateParsed -ge $minDate -And $dateParsed -ne $minDate)
 	{
 		$apiRequestUrl = $LIHOCOS_URL + '/api/computers/add_traffic/' + $LIHOCOS_COMPUTER_ID + '/' + $date + '/' + $in + '/' + $out + '?api-key=' + $LIHOCOS_API_KEY;
-		Invoke-WebRequest $apiRequestUrl
+		
+		#Not using Invoke-WebRequest because Windows 7 is still here...
+		#Invoke-WebRequest $apiRequestUrl
+		$webClient = New-Object System.Net.WebClient
+		$webClient.DownloadString($apiRequestUrl)
 	}
 }
