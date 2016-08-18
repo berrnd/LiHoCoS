@@ -3,10 +3,6 @@ LiHoCoS
 
 **Li**fe and **Ho**me **Co**ntrolling **S**ystem - a universal web application (PHP + MySQL) for controlling your smart home and managing your household
 
-> Visit [http://lihocos.de](http://lihocos.de) for more information
-
-> Try it: [http://demo.lihocos.de](http://demo.lihocos.de)
-
 ## How to install
 * Just unpack anywhere in your web directory, browse to /install and follow the instructions
     * See [INSTALL.md](INSTALL.md) for detailed instructions
